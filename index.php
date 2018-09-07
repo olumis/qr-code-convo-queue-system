@@ -49,36 +49,6 @@ function get_unscanned_student()
 
 /**
  * function to
- * get all scanned students data
- */
-
-function get_scanned_student()
-{
-    $mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
-
-    mysqli_select_db($mysqli, DB_NAME);
-
-    $sql = "SELECT * FROM student WHERE is_scanned = 1";
-
-    $res = mysqli_query($mysqli, $sql);
-
-    mysqli_close($mysqli);
-
-    if (is_object($res) && get_class($res) == 'mysqli_result')
-    {
-        $students = [];
-
-        while ($row = mysqli_fetch_assoc($res))
-        {
-            $students[] = $row;
-        }
-    }
-
-    return $students;
-}
-
-/**
- * function to
  * mark this student as is_scanned = 1
  */
 
