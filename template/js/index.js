@@ -47,60 +47,60 @@ function start()
 	
 	let conn = new ab.Session('ws://syahril.convo/wss',
 			
-        function()
+    function()
+    {
+        conn.subscribe('mark.student', function(topic, response)
         {
-            conn.subscribe('mark.student', function(topic, response)
+            /**
+             * response.data will contain array or unscanned students
+             * - to debug just console.log(response.data)
+             */
+
+            let studentlist = document.querySelector('#student-list tbody')
+
+            studentlist.innerHTML = ''
+
+            response.data.forEach(function(el,i)
             {
-                /**
-                 * response.data will contain array or unscanned students
-                 * - to debug just console.log(response.data)
-                 */
-
-                let studentlist = document.querySelector('#student-list tbody')
-
-                studentlist.innerHTML = ''
-
-                response.data.forEach(function(el,i)
-                {
-                    let tr = document.createElement('tr')
-
-                    tr.setAttribute('data-student-id', el.student_id)
-
-                    tr.innerHTML += '<td>'+ el.fullname +'</td><td>'+ el.faculty +'</td><td>'+ el.student_no +'</td>'
-
-                    studentlist.appendChild(tr)
-                })
-
-                /**
-                 * response.active will contain the currently active student info
-                 * - to debug just console.log(response.active)
-                 */
-                
-                let studentactive = document.querySelector('#student-active tbody')
-
-                studentactive.innerHTML = ''
-
                 let tr = document.createElement('tr')
 
-                tr.setAttribute('data-student-id', response.active.student_id)
+                tr.setAttribute('data-student-id', el.student_id)
 
-                tr.innerHTML += '<td>'+ response.active.fullname +'</td><td>'+ response.active.faculty +'</td><td>'+ response.active.student_no +'</td>'
+                tr.innerHTML += '<td>'+ el.fullname +'</td><td>'+ el.faculty +'</td><td>'+ el.student_no +'</td>'
 
-                studentactive.appendChild(tr)
+                studentlist.appendChild(tr)
             })
 
-            conn.subscribe('reset.student', function(topic, response)
-            {
-                location.href = location.href
-            })
-        },
-        
-        function()
+            /**
+             * response.active will contain the currently active student info
+             * - to debug just console.log(response.active)
+             */
+            
+            let studentactive = document.querySelector('#student-active tbody')
+
+            studentactive.innerHTML = ''
+
+            let tr = document.createElement('tr')
+
+            tr.setAttribute('data-student-id', response.active.student_id)
+
+            tr.innerHTML += '<td>'+ response.active.fullname +'</td><td>'+ response.active.faculty +'</td><td>'+ response.active.student_no +'</td>'
+
+            studentactive.appendChild(tr)
+        })
+
+        conn.subscribe('reset.student', function(topic, response)
         {
-            console.warn('WebSocket Connection Closed')
-        },
-        
-        {'skipSubprotocolCheck': true})
+            location.href = location.href
+        })
+    },
+    
+    function()
+    {
+        console.warn('WebSocket Connection Closed')
+    },
+    
+    {'skipSubprotocolCheck': true})
 }
 
 /**
