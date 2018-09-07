@@ -66,7 +66,7 @@ function start()
 
                 tr.setAttribute('data-student-id', el.student_id)
 
-                tr.innerHTML += '<td>'+ el.fullname +'</td><td>'+ el.faculty +'</td><td>'+ el.student_no +'</td>'
+                tr.innerHTML += `<td>${el.fullname}</td><td>${el.faculty}</td><td>${el.student_no}</td>`
 
                 studentlist.appendChild(tr)
             })
@@ -84,7 +84,7 @@ function start()
 
             tr.setAttribute('data-student-id', response.active.student_id)
 
-            tr.innerHTML += '<td>'+ response.active.fullname +'</td><td>'+ response.active.faculty +'</td><td>'+ response.active.student_no +'</td>'
+            tr.innerHTML += `<td>${response.active.fullname}</td><td>${response.active.faculty}</td><td>${response.active.student_no}</td>`
 
             studentactive.appendChild(tr)
         })
