@@ -64,8 +64,6 @@ function mark_student($student_id)
 
     $res = mysqli_query($mysqli, $sql);
 
-    mysqli_close($mysqli);
-
     if ($res === true)
     {
         return mysqli_affected_rows($mysqli);
@@ -89,11 +87,7 @@ function reset_student()
 
     $sql = "UPDATE student SET is_scanned = 0";
 
-    $sql = sprintf($sql, (int)$student_id);
-
     $res = mysqli_query($mysqli, $sql);
-
-    mysqli_close($mysqli);
 
     if ($res === true)
     {
@@ -150,7 +144,7 @@ if (isset($_POST['update']) && isset($_POST['student_id']) && $_POST['student_id
     $status = mark_student($_POST['student_id']);
 
     /**
-     * send a real time response to the browser
+     * send a real time response to the browser via websocket
      */
 
     $json = [
@@ -161,6 +155,8 @@ if (isset($_POST['update']) && isset($_POST['student_id']) && $_POST['student_id
     ];
     
     $socket->send(json_encode($json));
+
+    exit();
 }
 
 /**
@@ -172,7 +168,7 @@ if (isset($_POST['reset']))
     $status = reset_student();
 
     /**
-     * send a real time response to the browser
+     * send a real time response to the browser via websocket
      */
 
     $json = [
@@ -181,21 +177,8 @@ if (isset($_POST['reset']))
     ];
     
     $socket->send(json_encode($json));
-}
 
-/**
- * we receive a request to show all unscanned students
- */
-
-if (isset($_GET['get_unscanned_student']))
-{
-    $unscanned_students = get_unscanned_student();
-
-    $data = json_encode($unscanned_students);
-
-    header('Content-Type: application/json; charset=UTF-8');
-
-    exit($data);
+    exit();
 }
 
 /**
