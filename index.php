@@ -8,6 +8,16 @@
 require_once 'config.php';
 
 /**
+ * zmq
+ */
+
+$context = new ZMQContext();
+
+$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'index');
+
+$socket->connect("tcp://localhost:5555");
+
+/**
  * function to
  * get all unscanned students data
  */
@@ -87,13 +97,13 @@ function mark_student($student_id)
     mysqli_close($mysqli);
 
     if ($res === true)
-	{
-	    return mysqli_affected_rows($mysqli);
-	}
-	else
-	{
-	    throw new Exception(mysqli_error($mysqli));
-	}
+    {
+        return mysqli_affected_rows($mysqli);
+    }
+    else
+    {
+        throw new Exception(mysqli_error($mysqli));
+    }
 }
 
 /**
@@ -116,13 +126,47 @@ function reset_student()
     mysqli_close($mysqli);
 
     if ($res === true)
-	{
-	    return mysqli_affected_rows($mysqli);
-	}
-	else
-	{
-	    throw new Exception(mysqli_error($mysqli));
-	}
+    {
+        return mysqli_affected_rows($mysqli);
+    }
+    else
+    {
+        throw new Exception(mysqli_error($mysqli));
+    }
+}
+
+/**
+ * function to
+ * get one student info
+ */
+
+function student_info($student_id)
+{
+    $mysqli = mysqli_connect(DB_HOST, DB_USER, DB_PASS);
+
+    mysqli_select_db($mysqli, DB_NAME);
+
+    $sql = "SELECT * FROM student WHERE student_id = %d";
+
+    $sql = sprintf($sql, (int)$student_id);
+
+    $res = mysqli_query($mysqli, $sql);
+
+    mysqli_close($mysqli);
+
+    if (is_object($res) && get_class($res) == 'mysqli_result')
+    {
+        $students = [];
+
+        while ($row = mysqli_fetch_assoc($res))
+        {
+            $students[] = $row;
+        }
+    }
+
+    /** return one result from db or empty array */
+
+    return isset($students[0]) ? $students[0] : [];
 }
 
 /**
@@ -133,7 +177,20 @@ if (isset($_POST['update']) && isset($_POST['student_id']) && $_POST['student_id
 {
     $_POST['student_id'] = (int)$_POST['student_id'];
 
-    mark_student($_POST['student_id']);
+    $status = mark_student($_POST['student_id']);
+
+    /**
+     * send a real time response to the browser
+     */
+
+    $json = [
+        'id'        => 'mark.student',
+        'msg'       => 'Student marked as scanned',
+        'data'      => get_unscanned_student(),
+        'active'    => student_info($_POST['student_id'])
+    ];
+    
+    $socket->send(json_encode($json));
 }
 
 /**
@@ -142,7 +199,18 @@ if (isset($_POST['update']) && isset($_POST['student_id']) && $_POST['student_id
 
 if (isset($_POST['reset']))
 {
-    reset_student();
+    $status = reset_student();
+
+    /**
+     * send a real time response to the browser
+     */
+
+    $json = [
+        'id'   => 'reset.student',
+        'msg'  => 'Student list has been reset'
+    ];
+    
+    $socket->send(json_encode($json));
 }
 
 /**

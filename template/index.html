@@ -7,16 +7,14 @@
     <table id="student-list">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Full Name</th>
                 <th>Faculty</th>
                 <th>Student ID</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($unscanned_students as $i => $student) : ?>
+            <?php foreach($unscanned_students as $student) : ?>
                 <tr data-student-id="<?= $student['student_id'] ?>">
-                    <td><?= ($i+1) ?></td>
                     <td><?= $student['fullname'] ?></td>
                     <td><?= $student['faculty'] ?></td>
                     <td><?= $student['student_no'] ?></td>
@@ -30,7 +28,6 @@
     <table id="student-active">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Full Name</th>
                 <th>Faculty</th>
                 <th>Student ID</th>
@@ -46,6 +43,8 @@
     <button type="button" id="scan">Scan</button>
     <button type="button" id="reset">Reset</button>
     
+
+    <script src="template/js/autobahn.min.js"></script>
     <script src="template/js/index.js"></script>
 
 </body>
