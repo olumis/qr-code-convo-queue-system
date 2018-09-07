@@ -53,7 +53,7 @@ function start()
      * add an onclick event listener to the reset button
      */
 
-    document.querySelector('#reset').onclick = function() { reset_student() }
+    document.querySelector('#reset').onclick = reset_student
 }
 
 /**
