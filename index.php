@@ -146,7 +146,22 @@ if (isset($_POST['reset']))
 }
 
 /**
- * load HTML file
+ * we receive a request to show all unscanned students
+ */
+
+if (isset($_GET['get_unscanned_student']))
+{
+    $unscanned_students = get_unscanned_student();
+
+    $data = json_encode($unscanned_students);
+
+    header('Content-Type: application/json; charset=UTF-8');
+
+    exit($data);
+}
+
+/**
+ * finally, we load our HTML file
  * pass along a variable into the HTML file:
  * - $unscanned_students
  */

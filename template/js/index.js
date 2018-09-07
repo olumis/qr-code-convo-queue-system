@@ -78,7 +78,9 @@ function mark_student(student_id)
     {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200)
         {
+            /** show updated student list from db */
 
+            get_unscanned_student()
         }
     }
 
@@ -111,4 +113,38 @@ function reset_student()
     }
 
     xhr.send('reset')
+}
+
+/**
+ * function to
+ * send a GET to the server requesting all students marked as 'is_scanned = 0'
+ */
+
+function get_unscanned_student()
+{
+    const xhr = new XMLHttpRequest()
+
+    xhr.responseType = 'json'
+
+    xhr.open('GET', '?get_unscanned_student', true)
+
+    xhr.onload = function()
+    {
+        let studentlist = document.querySelector('#student-list tbody')
+
+        studentlist.innerHTML = ''
+
+        this.response.forEach(function(el,i)
+        {
+            let tr = document.createElement('tr')
+
+            tr.setAttribute('data-student-id', el.student_id)
+
+            tr.innerHTML += '<td>'+ parseInt(i+1) +'</td><td>'+ el.fullname +'</td><td>'+ el.faculty +'</td><td>'+ el.student_no +'</td>'
+
+            studentlist.appendChild(tr)
+        })  
+    }
+
+    xhr.send(null)
 }
