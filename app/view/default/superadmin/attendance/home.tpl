@@ -33,7 +33,7 @@
                         <tr>
                             <th><?= lang('fullname') ?></th>
                             <th><?= lang('faculty') ?></th>
-                            <th><?= lang('id') ?></th>
+                            <th><?= lang('student_id') ?></th>
                         </tr>
                     </thead>
                     <tbody id="confirmed-student">
