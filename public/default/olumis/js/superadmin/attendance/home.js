@@ -30,25 +30,28 @@ $(function()
             {
                 let cf = $('#confirmed-student')
 
-                let students = ''
+                let profile_pic = $('#profile-pic')
 
-                cf.html('')
+                let fullname = $('#fullname')
 
-                $.each(response.students, function(i)
+                let faculty = $('#faculty')
+
+                if (typeof response.students !== 'undefined')
                 {
-                    students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
-                })
+                    let students = ''
 
-                cf.append(students)
+                    cf.html('')
 
-                if (typeof response.astudent !== undefined)
+                    $.each(response.students, function(i)
+                    {
+                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
+                    })
+
+                    cf.append(students)
+                }
+
+                if (typeof response.astudent !== 'undefined')
                 {
-                    let profile_pic = $('#profile-pic')
-
-                    let fullname = $('#fullname')
-
-                    let faculty = $('#faculty')
-
                     let img = $('<img src="/img/profile/'+ response.astudent.dimension.thumb +'" style="border-radius: 50%;">')
 
                     img.on('load', function()
@@ -56,6 +59,20 @@ $(function()
                         fullname.html(response.astudent.fullname)
 
                         faculty.html(response.astudent.faculty)
+
+                        profile_pic.html(img)
+                    })
+                }
+
+                if (typeof response.reset !== 'undefined')
+                {
+                    let img = $('<img src="/default/olumis/img/holder.png" style="border-radius: 50%;">')
+
+                    img.on('load', function()
+                    {
+                        fullname.html('Student Name')
+
+                        faculty.html('Faculty')
 
                         profile_pic.html(img)
                     })
@@ -83,5 +100,14 @@ $(function()
         {
             $.post(location.href, {'go':'', 'user_id':topstudent_user_id}, function() {})
         }
+    })
+
+    // reset button
+
+    $(document).on('click', '#reset', function()
+    {
+        let topstudent = $('#confirmed-student tr:eq(0)')
+
+        $.post(location.href, {'reset':''}, function() {})
     })
 })

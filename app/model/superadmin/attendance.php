@@ -18,7 +18,7 @@ class Superadmin_Attendance
         
             AND a.is_active = 0
         
-        ORDER BY a.created_at ASC
+        ORDER BY a.created_at ASC, ua.faculty ASC
         
         ";
 

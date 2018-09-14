@@ -84,6 +84,33 @@ if (isset($_POST['go']) && (isset($_POST['user_id']) && $_POST['user_id']))
 }
 
 /**
+ * RESET button is clicked
+ * - mark all student 'is_active' as 0
+ */
+
+if (isset($_POST['reset']))
+{
+    $sql = "UPDATE attendance SET is_active = 0";
+
+    db_query($sql);
+
+    /**
+     * tell browser about the newly added students list
+     */
+
+    $confirmed_students = load_model('superadmin/attendance')->students()->rows;
+
+    $json = [
+        'id'        => sprintf('confirmed.student'),
+        'students'  => $confirmed_students,
+        'reset'     => true
+    ];
+
+    $socket->send(json_encode($json));
+}
+
+
+/**
  * confirmed students
  */
 

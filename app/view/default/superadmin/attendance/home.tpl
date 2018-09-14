@@ -58,8 +58,8 @@
             <hr>
 
             <div id="active-student">
-                <p class="text-center" id="profile-pic"><img src="/default/olumis/img/holder.png" style="border-radius: 50%;"></i></p>
                 <ul class="list-group">
+                    <li class="list-group-item text-center"><span id="profile-pic"><img src="/default/olumis/img/holder.png" style="border-radius: 50%;"></span></li>
 					<li class="list-group-item text-center"><span id="fullname"><?= lang('student_name') ?></span></li>
 					<li class="list-group-item text-center"><span id="faculty"><?= lang('faculty') ?></span></li>
 				</ul>
