@@ -18,6 +18,8 @@ class Superadmin_Attendance
         
             AND is_active = 0
         
+        ORDER BY a.created_at ASC
+        
         ";
 
         $res = db_query($sql);
