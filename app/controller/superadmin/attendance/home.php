@@ -6,7 +6,7 @@
 
 $context = new ZMQContext();
 
-$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'edit_song');
+$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'qr_code');
 
 $socket->connect("tcp://localhost:5555");
 
