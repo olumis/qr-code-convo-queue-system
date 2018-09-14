@@ -23,7 +23,7 @@
 						<i class="fa fa-users fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge"><?= 0 ?></div>
+						<div class="huge"><?= $totalstudents->row['total_rows'] ?></div>
 						<div><?= lang('attendance') ?></div>
 					</div>
 				</div>

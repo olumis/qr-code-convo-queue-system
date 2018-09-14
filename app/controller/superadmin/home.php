@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * total students
+ */
+
+$totalstudents = load_model('superadmin/attendance')->total_students();
+
+/**
  * total users
  */
 
@@ -36,6 +42,7 @@ $data = [
 	'header'		=> tpl('header.tpl', ['title' => lang('dashboard'), 'root' => 'superadmin', 'active' => 'superadmin']),
 	'footer'		=> tpl('footer.tpl'),
 	'breadcrumbs' 	=> $breadcrumbs,
+	'totalstudents'	=> $totalstudents,
     'totalusers'    => $totalusers,
     'totalpages'    => $totalpages
 ];

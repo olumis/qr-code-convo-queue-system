@@ -2,6 +2,22 @@
 class Superadmin_Attendance
 {
     function __construct() {}
+    
+    function total_students()
+    {
+        $sql = "SELECT
+        
+            COUNT(*) As total_rows
+        
+        FROM attendance a
+        WHERE 1=1
+        
+        ";
+
+        $res = db_query($sql);
+
+        return $res;
+    }
 
     function students()
     {
