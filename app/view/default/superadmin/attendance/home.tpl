@@ -12,7 +12,7 @@
 	</ol>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-4" id="camera-container">
     <div class="panel shadow">
 		<div class="panel-body">
             <p class="lead text-center">CAMERA</p>
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-4" id="confirmed-student-container">
     <div class="panel shadow">
 		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
@@ -35,19 +35,31 @@
                         <th><?= lang('id') ?></th>
                     </tr>
                 </thead>
-                <tbody id="confirmed-student"></tbody>
+                <tbody id="confirmed-student">
+                    <?php foreach($students as $student) : ?>
+                        <tr>
+                            <td><?= $student['fullname'] ?></td>
+                            <td><?= $student['faculty'] ?></td>
+                            <td><?= $student['student_id'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-4" id="active-student-container">
     <div class="panel shadow">
 		<div class="panel-body">
             <p class="lead text-center">ACTIVE STUDENT</p>
             <hr>
-            <div id="active-student">
-            </div>
+            <div id="active-student"></div>
+            
+            <hr>
+            <p class="text-center">
+                <input type="button" class="btn btn-primary" value="<?= lang('go') ?>">
+            </p>
         </div>
     </div>
 </div>

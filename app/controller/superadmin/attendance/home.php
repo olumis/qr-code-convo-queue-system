@@ -55,6 +55,12 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
 }
 
 /**
+ * confirmed students
+ */
+
+$students = load_model('superadmin/attendance')->students()->rows;
+
+/**
  * active page
  */
 
@@ -87,7 +93,8 @@ $scripts = [
 $data = [
 	'header'		=> tpl('header.tpl', ['title' => lang('attendance'), 'root' => $root, 'active' => $active]),
 	'footer'		=> tpl('footer.tpl', [], false, $scripts),
-	'breadcrumbs'	=> $breadcrumbs
+    'breadcrumbs'	=> $breadcrumbs,
+    'students'      => $students
 ];
 
 tpl('superadmin/attendance/home.tpl', $data,  true);

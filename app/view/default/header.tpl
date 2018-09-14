@@ -91,7 +91,6 @@
 							<ul class="nav navbar-nav">
 								<li class="<?= $root == 'login'      ? 'active' :'' ?>"><a href="<?= u('/login') ?>"><i class="fa fa-user"></i> <?= lang('login') ?></a></li>
 								<li class="<?= $root == 'register'   ? 'active' :'' ?>"><a href="<?= u('/register') ?>"><i class="fa fa-user-plus"></i> <?= lang('register') ?></a></li>
-								<li class="<?= $root == 'contact'    ? 'active' :'' ?>"><a href="<?= u('/contact') ?>"><i class="fa fa-phone-square"></i> <?= lang('contact') ?></a></li>
 							</ul>
 						</div>
 				
@@ -101,7 +100,6 @@
 					
 						<div class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
-								<li class="<?= $root == 'contact'    ? 'active' :'' ?>"><a href="<?= u('/contact') ?>"><i class="fa fa-phone-square"></i> <?= lang('contact') ?></a></li>
 								<li class="<?= $root == 'admin'      ? 'active' :'' ?>"><a href="<?= u('/admin') ?>"><i class="fa fa-cog"></i> <?= lang('member_area') ?></a></li>
 								<li class="<?= $root == 'superadmin' ? 'active' :'' ?>"><a href="<?= u('/superadmin') ?>"><i class="fa fa-cogs"></i> <?= lang('admin_area') ?></a></li>
 								<li><a href="<?= u('/logout') ?>"><i class="fa fa-sign-out"></i> <?= lang('logout') ?></a></li>
@@ -112,7 +110,6 @@
 						
 						<div class="collapse navbar-collapse">
 							<ul class="nav navbar-nav">
-								<li class="<?= $root == 'contact'    ? 'active' :'' ?>"><a href="<?= u('/contact') ?>"><i class="fa fa-phone-square"></i> <?= lang('contact') ?></a></li>
 								<li class="<?= $root == 'admin'      ? 'active' :'' ?>"><a href="<?= u('/admin') ?>"><i class="fa fa-cog"></i> <?= lang('member_area') ?></a></li>
 								<li><a href="<?= u('/logout') ?>"><i class="fa fa-sign-out"></i> <?= lang('logout') ?></a></li>
 							</ul>

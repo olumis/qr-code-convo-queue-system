@@ -394,3 +394,9 @@ p.lead
 {
 	text-align: justify;
 }
+
+#confirmed-student
+{
+	min-height: 500px;
+	overflow: auto;
+}
