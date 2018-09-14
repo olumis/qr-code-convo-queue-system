@@ -7,9 +7,10 @@ $(function()
         $.post(location.href, {'scan-qrc':'','qr_password':content}, function(response) {})
     })
 
-    Instascan.Camera.getCameras().then(function (cameras)
+    Instascan.Camera.getCameras().then(function(cameras)
     {
-        if (cameras.length > 0) {
+        if (cameras.length > 0)
+        {
             scanner.start(cameras[0])
         }
         else {
@@ -37,7 +38,7 @@ $(function()
                 {
                     students += '<tr><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
                 })
-                
+
                 cf.append(students)
             })
         },
