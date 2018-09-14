@@ -42,11 +42,11 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
              * tell browser about the newly added student
              */
 
-            $confirmed_student = load_model('superadmin/user')->user( $student->row['user_id'] )->row;
+            $confirmed_students = load_model('superadmin/attendance')->students()->rows;
 
             $json = [
-                'id' => sprintf('confirmed.student'),
-                'student'   => $confirmed_student
+                'id'        => sprintf('confirmed.student'),
+                'students'  => $confirmed_students
 	        ];
 	        
 	        $socket->send(json_encode($json));
@@ -86,7 +86,6 @@ $breadcrumbs[] = [
 ];
 
 $scripts = [
-    u(TEMPLATE.'/instascan/js/instascan.min.js'),
     u(TEMPLATE.'/olumis/js/superadmin/attendance/home.js')
 ];
 

@@ -22,29 +22,31 @@
     </div>
 </div>
 
-<div class="col-lg-4" id="confirmed-student-container">
+<div class="col-lg-4">
     <div class="panel shadow">
 		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
             <hr>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th><?= lang('fullname') ?></th>
-                        <th><?= lang('faculty') ?></th>
-                        <th><?= lang('id') ?></th>
-                    </tr>
-                </thead>
-                <tbody id="confirmed-student">
-                    <?php foreach($students as $student) : ?>
+            <div class="table-responsive" id="confirmed-student-container">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td><?= $student['fullname'] ?></td>
-                            <td><?= $student['faculty'] ?></td>
-                            <td><?= $student['student_id'] ?></td>
+                            <th><?= lang('fullname') ?></th>
+                            <th><?= lang('faculty') ?></th>
+                            <th><?= lang('id') ?></th>
                         </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="confirmed-student">
+                        <?php foreach($students as $student) : ?>
+                            <tr>
+                                <td><?= $student['fullname'] ?></td>
+                                <td><?= $student['faculty'] ?></td>
+                                <td><?= $student['student_id'] ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

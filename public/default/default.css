@@ -395,8 +395,8 @@ p.lead
 	text-align: justify;
 }
 
-#confirmed-student
+#confirmed-student-container
 {
-	height: 500px;
+	max-height: 200px;
 	overflow-y: scroll;
 }

@@ -27,9 +27,18 @@ $(function()
         {
             conn.subscribe('confirmed.student', function(topic, response)
             {
-                let nextstudent = '<tr><td>'+ response.student.fullname +'</td><td>'+ response.student.faculty +'</td><td>'+ response.student.student_id +'</td></tr>'
+                let cf = $('#confirmed-student')
 
-                $('#confirmed-student').append(nextstudent)
+                let students = ''
+
+                cf.html('')
+
+                $.each(response.students, function(i)
+                {
+                    students += '<tr><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
+                })
+                
+                cf.append(students)
             })
         },
         
