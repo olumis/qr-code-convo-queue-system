@@ -45,8 +45,9 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
             $confirmed_students = load_model('superadmin/attendance')->students()->rows;
 
             $json = [
-                'id'        => sprintf('confirmed.student'),
-                'students'  => $confirmed_students
+                'id'            => sprintf('confirmed.student'),
+                'students'      => $confirmed_students,
+                'scrollbottom'  => true
 	        ];
 	        
 	        $socket->send(json_encode($json));

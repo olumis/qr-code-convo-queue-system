@@ -28,7 +28,9 @@ $(function()
         {
             conn.subscribe('confirmed.student', function(topic, response)
             {
-                let cf = $('#confirmed-student')
+                let csc = $('#confirmed-student-container')
+
+                let cs = $('#confirmed-student')
 
                 let profile_pic = $('#profile-pic')
 
@@ -40,14 +42,21 @@ $(function()
                 {
                     let students = ''
 
-                    cf.html('')
+                    cs.html('')
 
                     $.each(response.students, function(i)
                     {
                         students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
                     })
 
-                    cf.append(students)
+                    cs.append(students)
+
+                    if (typeof response.scrollbottom !== 'undefined') {
+                        csc.scrollTop(9999)
+                    }
+                    else {
+                        csc.scrollTop(0)
+                    }
                 }
 
                 if (typeof response.astudent !== 'undefined')
@@ -75,6 +84,8 @@ $(function()
                         faculty.html('Faculty')
 
                         profile_pic.html(img)
+
+                        csc.scrollTop(0)
                     })
                 }
             })
