@@ -401,3 +401,9 @@ p.lead
 	overflow-y: scroll;
 	border: 1px solid #eee;
 }
+
+.qr-code
+{
+	border: 1px solid #eee;
+	margin-bottom: 20px;
+}

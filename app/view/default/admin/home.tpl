@@ -18,7 +18,7 @@
 				
 				<h5><?= lang('qr_code') ?></h5>
 				<p class="alert alert-info"><?= lang('qr_code_save') ?></p>
-				<img src="<?= u('/qrcode-png') ?>" alt="" class="img-responsive">
+				<img src="<?= u('/qrcode-png') ?>" alt="" class="img-responsive qr-code">
 				<p class="alert alert-warning"><?= lang('qr_code_pass') ?></p>
 
 			</div>
