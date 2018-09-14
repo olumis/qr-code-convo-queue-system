@@ -1,5 +1,6 @@
 <?php
 
+$_['student_name']      = 'Student Name';
 $_['go']                = 'Go';
 $_['id']                = 'ID';
 $_['attendance']        = 'Attendance';

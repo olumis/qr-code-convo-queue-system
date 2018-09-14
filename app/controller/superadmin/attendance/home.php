@@ -39,7 +39,7 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
             db_insert('attendance', $attendance);
 
             /**
-             * tell browser about the newly added student
+             * tell browser about the newly added students list
              */
 
             $confirmed_students = load_model('superadmin/attendance')->students()->rows;
@@ -52,6 +52,35 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
 	        $socket->send(json_encode($json));
         }
     }
+}
+
+/**
+ * GO button is clicked
+ * - mark this student 'is_active' as 1
+ */
+
+if (isset($_POST['go']) && (isset($_POST['user_id']) && $_POST['user_id']))
+{
+    $_POST['user_id'] = (int)$_POST['user_id'];
+
+    db_update('attendance', ['is_active' => 1], ['user_id' => $_POST['user_id']]);
+
+    /**
+     * tell browser about the newly added students list
+     * tell browser about the newly activated student info
+     */
+
+    $confirmed_students = load_model('superadmin/attendance')->students()->rows;
+
+    $activated_student = load_model('superadmin/user')->user($_POST['user_id'])->row;
+
+    $json = [
+        'id'        => sprintf('confirmed.student'),
+        'students'  => $confirmed_students, // list of confirmed but inactive students
+        'astudent'  => $activated_student // active student
+    ];
+
+    $socket->send(json_encode($json));
 }
 
 /**

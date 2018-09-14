@@ -38,7 +38,7 @@
                     </thead>
                     <tbody id="confirmed-student">
                         <?php foreach($students as $student) : ?>
-                            <tr>
+                            <tr data-user-id="<?= $student['user_id'] ?>">
                                 <td><?= $student['fullname'] ?></td>
                                 <td><?= $student['faculty'] ?></td>
                                 <td><?= $student['student_id'] ?></td>
@@ -56,11 +56,19 @@
 		<div class="panel-body">
             <p class="lead text-center">ACTIVE STUDENT</p>
             <hr>
-            <div id="active-student"></div>
+
+            <div id="active-student">
+                <p class="text-center" id="profile-pic"><img src="/default/olumis/img/holder.png" style="border-radius: 50%;"></i></p>
+                <ul class="list-group">
+					<li class="list-group-item text-center"><span id="fullname"><?= lang('student_name') ?></span></li>
+					<li class="list-group-item text-center"><span id="faculty"><?= lang('faculty') ?></span></li>
+				</ul>
+            </div>
             
             <hr>
             <p class="text-center">
-                <input type="button" class="btn btn-primary" value="<?= lang('go') ?>">
+                <input type="button" id="go" class="btn btn-success" value="<?= lang('go') ?>">
+                <input type="button" id="reset" class="btn btn-warning" value="<?= lang('reset') ?>">
             </p>
         </div>
     </div>
