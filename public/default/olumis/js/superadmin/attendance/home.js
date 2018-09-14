@@ -27,7 +27,7 @@ $(function()
         {
             conn.subscribe('confirmed.student', function(topic, response)
             {
-                let nextstudent = '<tr><td>'+ response.student.fullname +'</td><td>'+ response.student.faculty +'</td></tr>'
+                let nextstudent = '<tr><td>'+ response.student.fullname +'</td><td>'+ response.student.faculty +'</td><td>'+ response.student.student_id +'</td></tr>'
 
                 $('#confirmed-student').append(nextstudent)
             })
