@@ -29,10 +29,6 @@ if (strpos($_GET['route'], '/') !== false)
 {
 	list($root,$active) = explode('/', $_GET['route']);
 }
-else
-{
-	$active = 'home';
-}
 
 /**
  * breadcrumbs

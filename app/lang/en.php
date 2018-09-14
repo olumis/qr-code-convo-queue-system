@@ -1,5 +1,6 @@
 <?php
 
+$_['attendance']        = 'Attendance';
 $_['qr_code_save']      = 'Please save this qr code in your mobile phone. You will need to show this qr code in order to check-in your attendance during the convocation event.';
 $_['qr_code']           = 'QR CODE';
 $_['edit_profile']      = 'Edit Profile';

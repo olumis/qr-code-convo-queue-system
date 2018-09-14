@@ -212,8 +212,13 @@ if (isset($_POST['profile']))
 			 */
 			
 			$_SESSION['success'][] = sprintf(lang('succ_updated'),lang('profile'));
-		}
 
+			/**
+			 * go to admin index 
+			 */
+
+			 redirect(u('/admin'));
+		}
 		catch(Exception $e)
 		{
 			mysqli_rollback($mysqli);

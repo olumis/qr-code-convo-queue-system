@@ -43,5 +43,6 @@ $aclaccess['superadmin'] = [
     'superadmin/page',
     'superadmin/page/add',
     'superadmin/page/edit',
-    'superadmin/page/delete'
+	'superadmin/page/delete',
+	'superadmin/attendance'
 ];

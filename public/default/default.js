@@ -1,8 +1,3 @@
-
-/**
- * @author Charles Langkung
- */
-
 $(function()
 {
 	// submit
