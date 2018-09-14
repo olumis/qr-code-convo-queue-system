@@ -1,21 +1,24 @@
 <?php
+date_default_timezone_set('Asia/Kuala_Lumpur');
 
-/**
- * DB_HOST -> database hostname
- * DB_NAME -> database name
- * DB_USER -> database username
- * DB_PASS -> database user's password
- */
+error_reporting(E_ALL);
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'syahril_convo');
-define('DB_USER', 'root');
-define('DB_PASS', 'localdbroot');
+ini_set('display_errors', true);
 
-/**
- * turn ON error reporting
- */
+mb_internal_encoding('UTF-8');
 
- error_reporting(E_ALL);
+mb_http_output('UTF-8');
 
- 
+define('DEV', true);
+define('MAINTENANCE', false);
+define('PAGE_LIMIT', 5);
+define('TEMPLATE', 'default');
+define('PATH_IMG', 'public'.DIRECTORY_SEPARATOR.'img');
+
+define('DB_HOSTNAME', '127.0.0.1');
+define('DB_USERNAME', 'convo');
+define('DB_PASSWORD', 'UnB06QyeBnKOMdn4');
+define('DB_DATABASE', 'convo');
+
+define('URL', 'https://convo.sys/');
+define('WS_URL', 'wss://convo.sys/wss');
