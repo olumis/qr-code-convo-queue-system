@@ -17,7 +17,7 @@
 		<div class="panel-body">
             <p class="lead text-center">CAMERA</p>
             <hr>
-            <video id="camera" style="width: 100%;"></video>
+            <video id="camera" class="img-responsive"></video>
         </div>
     </div>
 </div>
@@ -27,8 +27,15 @@
 		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
             <hr>
-            <div id="confirm-student">
-            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><?= lang('fullname') ?></th>
+                        <th><?= lang('faculty') ?></th>
+                    </tr>
+                </thead>
+                <tbody id="confirmed-student"></tbody>
+            </table>
         </div>
     </div>
 </div>

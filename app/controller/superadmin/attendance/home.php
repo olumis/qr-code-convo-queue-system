@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * zmq
+ */
+
+$context = new ZMQContext();
+
+$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'edit_song');
+
+$socket->connect("tcp://localhost:5555");
+
+/**
  * we have valid scan request
  * - check if the qr code content matched the qr_password in the database
  * - the qr_password matched, get the student info
@@ -27,6 +37,19 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
             ];
 
             db_insert('attendance', $attendance);
+
+            /**
+             * tell browser about the newly added student
+             */
+
+            $confirmed_student = load_model('superadmin/user')->user( $student->row['user_id'] )->row;
+
+            $json = [
+                'id' => sprintf('confirmed.student'),
+                'student'   => $confirmed_student
+	        ];
+	        
+	        $socket->send(json_encode($json));
         }
     }
 }
