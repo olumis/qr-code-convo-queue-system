@@ -14,7 +14,8 @@ A PHP demo for student queue during convocation using qr code.
 - PHP7.2+
 - MySQL/MariaDB
 - Nginx/Apache
-- ZeroMQ
+- ZeroMQ http://zeromq.org/
+  - Windows dll: https://windows.php.net/downloads/pecl/releases/zmq/
 
 # Dependencies
 - Ratchet https://github.com/ratchetphp/Ratchet
