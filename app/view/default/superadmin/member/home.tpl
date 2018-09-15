@@ -23,8 +23,8 @@
 							<th>&nbsp;</th>
 							<th>#</th>
 							<th><?= lang('fullname') ?></th>
-							<th><?= lang('email') ?></th>
-							<th><?= lang('mobile_no') ?></th>
+							<th><?= lang('faculty') ?></th>
+							<th><?= lang('student_id') ?></th>
 							<th><?= lang('is_administrator') ?></th>
 						</tr>
 					</thead>
@@ -39,8 +39,8 @@
 								</td>
 								<td><?= (($page-1)*PAGE_LIMIT)+($i+1) ?></td>
 								<td><?= sprintf('%s %s', $member['usertitle'], $member['fullname']) ?></td>
-								<td><?= $member['email'] ?></td>
-								<td><?= $member['mobile_no'] ?></td>
+								<td><?= $member['faculty'] ?></td>
+								<td><?= $member['student_id'] ?></td>
 								<td>
 									<?php if ($member['is_superadmin']) : ?>
 										<span class="label label-success"><?= lang('yes') ?></span>

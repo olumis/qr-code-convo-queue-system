@@ -32,12 +32,6 @@ $(function()
 
                 let cs = $('#confirmed-student')
 
-                let profile_pic = $('#profile-pic')
-
-                let fullname = $('#fullname')
-
-                let faculty = $('#faculty')
-
                 if (typeof response.students !== 'undefined')
                 {
                     let students = ''
@@ -46,17 +40,12 @@ $(function()
 
                     $.each(response.students, function(i)
                     {
-                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
+                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td><td>'+ response.students[i].queue_no +'</td></tr>'
                     })
 
                     cs.append(students)
 
-                    if (typeof response.scrollbottom !== 'undefined') {
-                        csc.scrollTop(9999)
-                    }
-                    else {
-                        csc.scrollTop(0)
-                    }
+                    csc.scrollTop(9999)
                 }
             })
         },

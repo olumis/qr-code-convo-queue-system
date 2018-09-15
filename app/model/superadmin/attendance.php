@@ -25,7 +25,6 @@ class Superadmin_Attendance
         
             a.*,
             ua.fullname,
-            ua.faculty,
             ua.student_id
         
         FROM attendance a
@@ -49,7 +48,6 @@ class Superadmin_Attendance
         
             a.*,
             ua.fullname,
-            ua.faculty,
             ua.student_id
         
         FROM attendance a

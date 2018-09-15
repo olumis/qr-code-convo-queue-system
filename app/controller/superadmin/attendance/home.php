@@ -30,8 +30,14 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
 
         if (!$myattendance->num_rows)
         {
+            $faculty = load_model('superadmin/user')->user($student->row['user_id'])->row['faculty'];
+
+            $queue_no = generate_queue_no($faculty);
+
             $attendance = [
                 'user_id'       => $student->row['user_id'],
+                'faculty'       => $faculty,
+                'queue_no'      => $queue_no,
                 'is_active'     => 0,
                 'created_at'    => date('Y-m-d H:i:s')
             ];
@@ -46,8 +52,7 @@ if (isset($_POST['scan-qrc']) && (isset($_POST['qr_password']) && $_POST['qr_pas
 
             $json = [
                 'id'            => sprintf('confirmed.student'),
-                'students'      => $confirmed_students,
-                'scrollbottom'  => true
+                'students'      => $confirmed_students
 	        ];
 	        
 	        $socket->send(json_encode($json));

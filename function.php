@@ -1,8 +1,14 @@
 <?php
 
-function generate_queue($faculty = '')
+function generate_queue_no($faculty = '')
 {
-    
+    $sql = "SELECT COUNT(*) As queue_no FROM attendance WHERE faculty = '%s' GROUP BY faculty";
+
+    $sql = sprintf($sql, $faculty); 
+
+    $res = db_query($sql);
+
+    return $res->row['queue_no']+1;
 }
 
 function makefilename($user_id = 0)

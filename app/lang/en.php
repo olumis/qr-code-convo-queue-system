@@ -1,5 +1,6 @@
 <?php
 
+$_['queue_no']          = 'Queue No';
 $_['delete_faculty']    = 'Delete Faculty';
 $_['add_faculty']       = 'Add Faculty';
 $_['edit_faculty']      = 'Edit Faculty';

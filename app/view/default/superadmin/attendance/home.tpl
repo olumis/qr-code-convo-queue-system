@@ -38,6 +38,7 @@
                             <th><?= lang('fullname') ?></th>
                             <th><?= lang('faculty') ?></th>
                             <th><?= lang('id') ?></th>
+                            <th><?= lang('queue_no') ?></th>
                         </tr>
                     </thead>
                     <tbody id="confirmed-student">
@@ -46,6 +47,7 @@
                                 <td><?= $student['fullname'] ?></td>
                                 <td><?= $student['faculty'] ?></td>
                                 <td><?= $student['student_id'] ?></td>
+                                <td><?= $student['queue_no'] ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

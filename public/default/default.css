@@ -408,3 +408,8 @@ p.lead
 	border: 1px solid #eee;
 	margin-bottom: 20px;
 }
+
+thead > tr > th
+{
+	text-transform: uppercase;
+}
