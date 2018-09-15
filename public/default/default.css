@@ -396,9 +396,9 @@ p.lead
 
 #confirmed-student-container
 {
-	max-height: 205px;
-	min-height: 205px;
-	height: 205px;
+	max-height: 350px;
+	min-height: 350px;
+	height: 350px;
 	overflow-y: scroll;
 	border: 1px solid #eee;
 }

@@ -12,19 +12,15 @@
 	</ol>
 </div>
 
-<div class="col-lg-4" id="camera-container">
+<div class="col-lg-6">
     <div class="panel shadow">
 		<div class="panel-body">
+            
             <p class="lead text-center">CAMERA</p>
             <hr>
             <video id="camera" class="img-responsive"></video>
-        </div>
-    </div>
-</div>
+            <hr>
 
-<div class="col-lg-4">
-    <div class="panel shadow">
-		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
             <hr>
             <div class="table-responsive" id="confirmed-student-container">
@@ -33,7 +29,7 @@
                         <tr>
                             <th><?= lang('fullname') ?></th>
                             <th><?= lang('faculty') ?></th>
-                            <th><?= lang('student_id') ?></th>
+                            <th><?= lang('id') ?></th>
                         </tr>
                     </thead>
                     <tbody id="confirmed-student">
@@ -51,7 +47,7 @@
     </div>
 </div>
 
-<div class="col-lg-4" id="active-student-container">
+<div class="col-lg-6" id="active-student-container">
     <div class="panel shadow">
 		<div class="panel-body">
             <p class="lead text-center">ACTIVE STUDENT</p>
