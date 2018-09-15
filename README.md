@@ -6,7 +6,7 @@ A PHP demo for student queue during convocation using qr code.
 - Login using laptop/pc with webcam
   - Email: admin@gmail.com
   - Password: admin
-- Download student qr code at convo.olumis.com/qr-code using your smartphone
+- Download student qr code at https://convo.olumis.com/qr-code using your smartphone
 - Navigate to the Admin Area --> Attendance and allow permission for the browser to use your webcam 
 - Scan qr code from your smartphone
 
