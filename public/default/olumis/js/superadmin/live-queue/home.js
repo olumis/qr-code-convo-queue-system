@@ -58,6 +58,36 @@ $(function()
                         csc.scrollTop(0)
                     }
                 }
+
+                if (typeof response.astudent !== 'undefined')
+                {
+                    let img = $('<img src="/img/profile/'+ response.astudent.dimension.thumb +'" style="border-radius: 50%;">')
+
+                    img.on('load', function()
+                    {
+                        fullname.html(response.astudent.fullname)
+
+                        faculty.html(response.astudent.faculty)
+
+                        profile_pic.html(img)
+                    })
+                }
+
+                if (typeof response.reset !== 'undefined')
+                {
+                    let img = $('<img src="/default/olumis/img/holder.png" style="border-radius: 50%;">')
+
+                    img.on('load', function()
+                    {
+                        fullname.html('Student Name')
+
+                        faculty.html('Faculty')
+
+                        profile_pic.html(img)
+
+                        csc.scrollTop(0)
+                    })
+                }
             })
         },
         
@@ -68,4 +98,27 @@ $(function()
         
         {'skipSubprotocolCheck': true}
     )
+
+    // go button
+
+    $(document).on('click', '#go', function()
+    {
+        let topstudent = $('#confirmed-student tr:eq(0)')
+
+        let topstudent_user_id = $(topstudent).data('user-id')
+
+        if (topstudent.length)
+        {
+            $.post(location.href, {'go':'', 'user_id':topstudent_user_id}, function() {})
+        }
+    })
+
+    // reset button
+
+    $(document).on('click', '#reset', function()
+    {
+        let topstudent = $('#confirmed-student tr:eq(0)')
+
+        $.post(location.href, {'reset':''}, function() {})
+    })
 })

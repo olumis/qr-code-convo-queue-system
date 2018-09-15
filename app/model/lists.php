@@ -21,14 +21,15 @@ class lists
     function get($table = '', $page = 1, $limit = PAGE_LIMIT, $order_by = 'ORDER BY name')
 	{
 		$sql = "SELECT
-			
-			name
+
+			*
+
+		FROM list_%s
+		WHERE 1=1
 		
-		FROM list_%s WHERE 1=1
-		{$order_by}
-        LIMIT ".(($page-1) * $limit).", ".$limit;
+			{$order_by}
 		
-		
+		LIMIT ".(($page-1) * $limit).", ".$limit;
 		
 		$sql = sprintf($sql, $table);
 		
@@ -36,6 +37,28 @@ class lists
 		
 		$res->total_rows = $this->total_get($table)->row['total_rows'];
 		
+		return $res;
+	}
+
+	function one($table = '', $table_id = 0)
+	{
+		$sql = "SELECT
+		
+			*
+
+		FROM list_%s
+		WHERE 1=1
+		
+			AND %s_id = %d
+		
+		LIMIT 1
+		
+		";
+		
+		$sql = sprintf($sql, $table, $table, $table_id);
+		
+		$res = db_query($sql);
+
 		return $res;
 	}
 }

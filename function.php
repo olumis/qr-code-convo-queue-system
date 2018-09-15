@@ -1,5 +1,10 @@
 <?php
 
+function generate_queue($faculty = '')
+{
+    
+}
+
 function makefilename($user_id = 0)
 {
     $randomfilename = md5( $user_id . microtime() . random_bytes(16) );

@@ -39,5 +39,14 @@ $aclaccess['superadmin'] = [
 	'superadmin/member/delete-image',
 	'superadmin/member/login',
 	'superadmin/member/search',
-	'superadmin/attendance'
+	'superadmin/page',
+	'superadmin/page/add',
+	'superadmin/page/edit',
+	'superadmin/page/delete',
+	'superadmin/attendance',
+	'superadmin/live-queue',
+	'superadmin/faculty',
+	'superadmin/faculty/add',
+	'superadmin/faculty/edit',
+	'superadmin/faculty/delete',
 ];

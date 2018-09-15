@@ -1,5 +1,12 @@
 <?php
 
+$_['delete_faculty']    = 'Delete Faculty';
+$_['add_faculty']       = 'Add Faculty';
+$_['edit_faculty']      = 'Edit Faculty';
+$_['faculty_name']      = 'Faculty Name';
+$_['edit']              = 'Edit';
+$_['new_faculty']       = 'New Faculty';
+$_['live_queue']        = 'Live Queue';
 $_['is_administrator']  = 'Is Administrator';
 $_['administrator']     = 'Administrator';
 $_['student_name']      = 'Student Name';

@@ -1,6 +1,6 @@
 <?= $header ?>
 
-<div class="col-lg-offset-2 col-lg-8">
+<div class="col-lg-12">
 	<ol class="breadcrumb">
 		<?php foreach ($breadcrumbs as $breadcrumb) : ?>
 			<?php if (!$breadcrumb['is_active']) : ?>
@@ -12,7 +12,7 @@
 	</ol>
 </div>
 
-<div class="col-lg-offset-2 col-lg-8">
+<div class="col-lg-12">
 	<div class="clearfix">		
 		<div class="pull-right">
 			<a class="btn btn-primary" href="<?= u('/superadmin/page/add') ?>"><i class="fa fa-file-o fa-lg"></i> <?= lang('new_page') ?></a>
@@ -21,7 +21,7 @@
 	<br>
 </div>
 
-<div class="col-lg-offset-2 col-lg-8">
+<div class="col-lg-12">
 	<div class="panel shadow">
 		<div class="panel-body">
 		
@@ -40,7 +40,7 @@
 					
 						<?php foreach ($pages->rows as $i => $page ) : ?>
 							<tr>
-								<td>
+								<td align="right">
 									<a href="<?= u('/superadmin/page/edit?page_id=%d', $page['page_id']) ?>" class="btn btn-default" title="<?= lang('edit') ?>"><i class="fa fa-edit fa-2x"></i></a>
 									<a href="<?= u('/superadmin/page/delete?page_id=%d', $page['page_id']) ?>" class="btn btn-default" title="<?= lang('delete') ?>"><i class="fa fa-times-circle fa-2x"></i></a>
 								</td>

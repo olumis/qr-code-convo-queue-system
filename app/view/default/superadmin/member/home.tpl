@@ -33,7 +33,7 @@
 					
 						<?php foreach ($members->rows as $i => $member ) : ?>
 							<tr>
-								<td>
+								<td align="right">
 									<a href="<?= u('/superadmin/member/edit?user_id=%d', $member['user_id']) ?>" class="btn btn-default" title="<?= lang('edit') ?>"><i class="fa fa-edit fa-2x"></i></a>
 									<a href="<?= u('/superadmin/member/delete?user_id=%d', $member['user_id']) ?>" class="btn btn-default" title="<?= lang('delete') ?>"><i class="fa fa-times-circle fa-2x"></i></a>
 								</td>

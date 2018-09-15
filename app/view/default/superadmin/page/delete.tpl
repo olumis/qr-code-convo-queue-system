@@ -1,6 +1,6 @@
 <?= $header ?>
 
-<div class="col-lg-offset-3 col-lg-6">
+<div class="col-lg-12">
 	<ol class="breadcrumb">
 		<?php foreach ($breadcrumbs as $breadcrumb) : ?>
 			<?php if (!$breadcrumb['is_active']) : ?>
@@ -12,7 +12,7 @@
 	</ol>
 </div>
 
-<div class="col-lg-offset-3 col-lg-6">
+<div class="col-lg-12">
 	<div class="panel shadow">
 		<div class="panel-body">
 		
@@ -24,7 +24,7 @@
 	</div>
 </div>
 
-<div class="col-lg-offset-3 col-lg-6">
+<div class="col-lg-12">
 	<div class="panel shadow">
 		<div class="panel-body">
     		<form action="<?= u('/superadmin/page/delete?page_id=%d', $_GET['page_id']) ?>" method="post" autocomplete="off" class="form-horizontal">
