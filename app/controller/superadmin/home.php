@@ -7,6 +7,12 @@
 $totalstudents = load_model('superadmin/attendance')->total_students();
 
 /**
+ * total faculties
+ */
+
+$totalfaculties = load_model('lists')->total_get('faculty');
+
+/**
  * total users
  */
 
@@ -43,6 +49,7 @@ $data = [
 	'footer'		=> tpl('footer.tpl'),
 	'breadcrumbs' 	=> $breadcrumbs,
 	'totalstudents'	=> $totalstudents,
+	'totalfaculties'=> $totalfaculties,
     'totalusers'    => $totalusers,
     'totalpages'    => $totalpages
 ];

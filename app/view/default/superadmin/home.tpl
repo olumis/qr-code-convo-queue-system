@@ -59,7 +59,7 @@
 						<i class="fa fa-university fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge"><?= 0 ?></div>
+						<div class="huge"><?= $totalfaculties->row['total_rows'] ?></div>
 						<div><?= lang('faculty') ?></div>
 					</div>
 				</div>

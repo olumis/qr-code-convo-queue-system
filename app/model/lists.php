@@ -2,7 +2,7 @@
 
 class lists
 {
-    function total_get($table = '', $page = 1, $limit = PAGE_LIMIT)
+    function total_get($table = '')
     {
         $sql = "SELECT
             
