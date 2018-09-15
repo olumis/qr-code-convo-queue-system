@@ -1,9 +1,9 @@
 <?php
 
 $acl = [
-    'guest'			=> 1,
-    'icp'			=> 2, // in-complete profile
-    'admin'			=> 3,
+	'guest'			=> 1,
+	'icp'			=> 2, // in-complete profile
+	'admin'			=> 3,
 	'superadmin'	=> 4,
 	'student'		=> 5,
 	'staff'			=> 6
@@ -18,7 +18,6 @@ $aclaccess['guest'] = $aclaccess['icp'] = [
 	'register',
 	'verify',
 	'about',
-	'contact',
 	'profile',
 	'profile/delete-image',
 	'forgot-password',
@@ -40,9 +39,5 @@ $aclaccess['superadmin'] = [
 	'superadmin/member/delete-image',
 	'superadmin/member/login',
 	'superadmin/member/search',
-    'superadmin/page',
-    'superadmin/page/add',
-    'superadmin/page/edit',
-	'superadmin/page/delete',
 	'superadmin/attendance'
 ];
