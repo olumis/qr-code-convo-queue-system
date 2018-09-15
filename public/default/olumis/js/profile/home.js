@@ -66,6 +66,8 @@ $(function()
 				$('.thumb:eq(0)').before(data.result.data);
 				
 				$('.thumb:eq(1)').remove();
+
+				$('#has-profile-pic').html('<input type="hidden" name="has_profile_pic">')
 			}
 		}
 	});

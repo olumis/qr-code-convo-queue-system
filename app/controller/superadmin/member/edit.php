@@ -1,32 +1,10 @@
 <?php
 
-if (!goodget()) redirect(u('/superadmin/member'));
-
-function goodget()
-{
-	$_SESSION['error'] = [];
-	
-	clean();
-	
-	if (!isset($_GET['user_id']) || !$_GET['user_id'])
-	{
-		$_SESSION['error'][] = sprintf(lang('err_required'),lang('user'));
-	}
-	else
-	{
-		$_GET['user_id'] = (int)$_GET['user_id'];
-	}
-	
-	if ($_SESSION['error']) return false;
-	
-	return true;
-}
-
 function goodupload()
 {
 	clean();
 
-	$_SESSION['error'] = [];
+	$_SESSION['error'] = array();
 
 	goodimage();
 
@@ -39,46 +17,46 @@ if (isset($_POST['upload']))
 {
 	if (goodupload())
 	{
-	    $imgpath = $_FILES['image']['tmp_name'];
-	    
-	    $filename = makefilename(random_bytes(16));
-	    
-	    $where = getcwd() .DIRECTORY_SEPARATOR. PATH_IMG .DIRECTORY_SEPARATOR.'profile'.DIRECTORY_SEPARATOR;
-	    
-	    /**
-	     * dimension
-	     */
-	    
-	    $dimension = [
-	        'large'		=> crop($imgpath, $filename, $where, 0, 0, true),
-	        'medium'	=> crop($imgpath, $filename, $where, 500, 0),
-	        'thumb'		=> crop($imgpath, $filename, $where, 300, 300)
-	    ];
-	    
-	    $user_id = (int)$_GET['user_id'];
-	    
-	    db_delete('user_image', ['user_id' => $user_id]);
-	    
-	    db_insert('user_image', ['user_id' => $user_id, 'dimension' => serialize($dimension)]);
-	    
-	    $user_image_id = mysqli_insert_id($mysqli);
-	    
-	    $thumburl = u('/img/profile/%s', $dimension['thumb']);
-	    
-	    $largeurl = u('/img/profile/%s', $dimension['large']);
-	    
-	    $deleteurl = sprintf(u('/').'superadmin/member/delete-image?user_id=%d&user_image_id=%d', $user_id, $user_image_id);
-	    
-	    $html = '<div class="thumb">  <a href="'.$deleteurl.'" class="close">&times;</a> <a class="thumbnail" href="'.$largeurl.'"><img class="img-responsive" src="'.$thumburl.'" alt=""></a></div>';
-	    
-	    $json = [
-	        'status' => 'success',
-	        'data'   => $html
-	    ];
-	    
-	    header('Content-Type: application/json; charset=UTF-8');
-	    
-	    exit(json_encode($json));
+		$imgpath = $_FILES['image']['tmp_name'];
+			
+		$filename = makefilename($_GET['user_id']);
+			
+		$where = getcwd() .'/'. PATH_IMG .'/profile/';
+
+		/**
+		 * dimension
+		 */
+			
+		$dimension = [
+			'large'		=> crop($imgpath, $filename, $where, 0, 0, true),
+			'medium'	=> crop($imgpath, $filename, $where, 500, 0),
+			'thumb'		=> crop($imgpath, $filename, $where, 300, 300)
+		];
+		
+		$user_id = $_GET['user_id'];
+		
+		db_delete('user_image', ['user_id' => $user_id]);
+		
+		db_insert('user_image', ['user_id' => $user_id, 'dimension' => serialize($dimension)]);
+
+		$user_image_id = mysqli_insert_id($mysqli);
+
+		$thumburl = u('/img/profile/%s', $dimension['thumb']);
+
+		$largeurl = u('/img/profile/%s', $dimension['large']);
+
+		$deleteurl = sprintf(u('/').'superadmin/member/delete-image?user_image_id=%d&user_id=%d', $user_image_id, $user_id);
+
+		$html = '<div class="thumb">  <a href="'.$deleteurl.'" class="close">&times;</a> <a class="thumbnail" href="'.$largeurl.'"><img class="img-responsive" src="'.$thumburl.'" alt=""></a></div>';
+		
+		$json = [
+			'status' => 'success',
+			'data'   => $html
+		];
+
+		header('Content-Type: application/json; charset=UTF-8');
+
+		exit(json_encode($json));
 	}
 
 	else
@@ -87,7 +65,7 @@ if (isset($_POST['upload']))
 			'status'  => 'error',
 			'data'    => $_SESSION['error']
 		];
-
+		
 		unset($_SESSION['error']);
 
 		header('Content-Type: application/json; charset=UTF-8');
@@ -98,65 +76,43 @@ if (isset($_POST['upload']))
 
 function goodpost()
 {
-    clean();
-    
-    $_SESSION['error'] = [];
-    
-    if (!isset($_POST['usertitle']) || !$_POST['usertitle'])
-    {
-        $_SESSION['error'][] = sprintf(lang('err_required'),lang('usertitle'));
-    }
-    
-    if (!isset($_POST['fullname']) || !$_POST['fullname'])
-    {
-        $_SESSION['error'][] = sprintf(lang('err_required'),lang('fullname'));
-    }
-    else
-    {
-        $_POST['fullname'] = ucwords(strtolower($_POST['fullname']));
-    }
-    
-    if (!isset($_POST['mobile_no']) || !$_POST['mobile_no'])
-    {
-        $_SESSION['error'][] = sprintf(lang('err_required'),lang('mobile_no'));
-    }
-    else
-    {
-        if (!preg_match('/^[0-9]{7,}$/', $_POST['mobile_no']))
-        {
-            $_SESSION['error'][] = sprintf(lang('err_format'),lang('mobile_no'));
-        }
-    }
-    
-    if (!isset($_POST['email']) || !$_POST['email'])
-    {
-        $_SESSION['error'][] = sprintf(lang('err_required'),lang('email'));
-    }
-    else
-    {
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-        {
-            $_SESSION['error'][] = sprintf(lang('err_format'),lang('email'));
-        }
-        else
-        {
-            $res = db_exists('user', ['email' => $_POST['email'], 'is_active' => 1]);
-            
-            if ($res->num_rows && $res->row['user_id'] != $_GET['user_id'])
-            {
-                $_SESSION['error'][] = sprintf(lang('err_exists'),$_POST['email']);
-            }
-            else
-            {
-                $_POST['email'] = strtolower($_POST['email']);
-            }
-        }
-    }
-    
-    if ($_SESSION['error']) return false;
-    
-    return true;
+	clean();
+
+	$_SESSION['error'] = [];
+
+	if (!isset($_POST['has_profile_pic']))
+	{
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('profile_picture'));
+	}
+
+	if (!isset($_POST['usertitle']) || !$_POST['usertitle'])
+	{
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('usertitle'));
+	}
+
+	if (!isset($_POST['fullname']) || !$_POST['fullname'])
+	{
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('fullname'));
+	}
+	
+	if (!isset($_POST['mobile_no']) || !$_POST['mobile_no'])
+	{
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('mobile_no'));
+	}
+	else
+	{
+		if (!preg_match('/^[0-9]{7,}$/', $_POST['mobile_no']))
+		{
+			$_SESSION['error'][] = sprintf(lang('err_format'),lang('mobile_no'));
+		}
+	}
+
+	if ($_SESSION['error']) return false;
+	
+	return true;
 }
+
+$posted = [];
 
 if (isset($_POST['profile']))
 {
@@ -169,40 +125,108 @@ if (isset($_POST['profile']))
 			$time = time();
 				
 			$user_id = $_GET['user_id'];
+
+			/**
+			 * new password
+			 */
 			
 			if (isset($_POST['password']) && $_POST['password'])
 			{
-			    $hashedcrypt = hasher($_POST['password']);
-				
-				/**
-				 * new password
-				 */
-				
+				$hashedcrypt = hasher($_POST['password']);
+
 				db_update('user', ['password' => $hashedcrypt], ['user_id' => $user_id]);
 			}
-			
+
 			/**
-			 * user email
+			 * qr password
 			 */
-			
-			$user = ['email' => $_POST['email'] ];
-			
-			db_update('user', $user, ['user_id' => $user_id]);
-			
+
+			$qrp = db_exists('user', ['user_id' => $user_id]);
+
+			if ($qrp->num_rows && !$qrp->row['qr_password'])
+			{
+				$user = [
+					'qr_password' => hash('sha512', hasher(random_bytes(16)))
+				];
+	
+				db_update('user', $user, ['user_id' => $user_id]);
+			}
+
+			/**
+			 * is this user now an admin?
+			 */
+
+			if (isset($_POST['is_superadmin']) && $_POST['is_superadmin'])
+			{
+				$user = [
+					'is_superadmin' => 1
+				];
+	
+				db_update('user', $user, ['user_id' => $user_id]);
+
+				/**
+				 * acl
+				 * - delete user previous 'superadmin'
+				 * - insert 'superadmin'
+				 */
+
+				$where = [
+					'user_id' => $user_id,
+					'acl_id'  => $acl['superadmin']
+				];
+					
+				db_delete('user_acl', $where);
+				
+				$issuperadmin = db_exists('user_acl', ['user_id' => $user_id, 'acl_id' => $acl['superadmin'] ]);
+				
+				if (!$issuperadmin->num_rows)
+				{
+					$user_acl = [
+						'user_id' => $user_id,
+						'acl_id'  => $acl['superadmin']
+					];
+						
+					db_insert('user_acl', $user_acl);
+				}
+				
+				acl_update(true);
+			}
+			else
+			{
+				$user = [
+					'is_superadmin' => 0
+				];
+	
+				db_update('user', $user, ['user_id' => $user_id]);
+
+				/**
+				 * acl
+				 * - delete user previous 'superadmin'
+				 */
+
+				$where = [
+					'user_id' => $user_id,
+					'acl_id'  => $acl['superadmin']
+				];
+					
+				db_delete('user_acl', $where);
+
+				acl_update(true);
+			}
+
 			/**
 			 * user_attr
 			 */
 				
 			$user_attr = [
-			    'usertitle'      => $_POST['usertitle'],
-			    'fullname'       => $_POST['fullname'],
-			    'mobile_no'      => $_POST['mobile_no'],
-			    'account_no'     => $_POST['account_no'],
-			    'bank_name'      => $_POST['bank_name'],
-			    'holder_name'    => $_POST['holder_name'],
-			    'is_marketer'    => $_POST['is_marketer']
+			    'usertitle'		=> $_POST['usertitle'],
+			    'fullname'		=> $_POST['fullname'],
+			    'mobile_no'		=> $_POST['mobile_no'],
+			    'faculty'		=> $_POST['faculty'],
+			    'student_id'	=> $_POST['student_id'],
+			    'staff_id'		=> $_POST['staff_id']
 			];
-			
+				
 			db_update('user_attr', $user_attr, ['user_id' => $user_id]);
 			
 			/**
@@ -214,64 +238,35 @@ if (isset($_POST['profile']))
 			$_SESSION['user']['fullname'] = $_POST['fullname'];
 			
 			/**
-			 * marketer acl_id
+			 * acl
+			 * - delete 'icp'
+			 * - insert 'admin'
 			 */
-
-			$sendemail = false;
+				
+			$where = [
+			    'user_id' => $user_id,
+			    'acl_id'  => $acl['icp']
+			];
+				
+			db_delete('user_acl', $where);
 			
-			if ($_POST['is_marketer'])
+			/**
+			 * add admin acl_id, i.e admin == member
+			 */
+			
+			$isadmin = db_exists('user_acl', ['user_id' => $user_id, 'acl_id' => $acl['admin'] ]);
+			
+			if (!$isadmin->num_rows)
 			{
-			    /**
-			     * add marketer acl_id
-			     */
-			    
-			    $ismarketer = db_exists('user_acl', ['user_id' => $user_id, 'acl_id' => $acl['marketing'] ]);
-			    
-			    if (!$ismarketer->num_rows)
-			    {
-			        $user_acl = [
-			            'user_id' => $user_id,
-			            'acl_id'  => $acl['marketing']
-			        ];
-			        
-					db_insert('user_acl', $user_acl);
+				$user_acl = [
+				    'user_id' => $user_id,
+				    'acl_id'  => $acl['admin']
+				];
 					
-					$sendemail = true;
-			    }
-			}
-			else
-			{
-			    /**
-			     * remove marketer acl_id
-			     */
-			    
-			    $where = [
-			        'user_id' => $user_id,
-			        'acl_id'  => $acl['marketing']
-			    ];
-			    
-			    db_delete('user_acl', $where);
+				db_insert('user_acl', $user_acl);
 			}
 			
 			acl_update(true);
-
-			/**
-			 * send notification email to the new marketer
-			 */
-
-			if ($sendemail)
-			{
-				$recipient = load_model('superadmin/user')->user($user_id)->row;
-
-				$emaildata = [
-					'tpl'          => 'marketer-approved.tpl',
-					'to'           => $recipient['email'],
-					'subject'      => lang('es_marketer_approved'),
-					'replacements' => ['fullname' => sprintf('%s %s', $recipient['usertitle'],$recipient['fullname'])]
-				];
-
-				firemail($emaildata);
-			}
 			
 			/**
 			 * commit DB
@@ -284,15 +279,22 @@ if (isset($_POST['profile']))
 			 */
 			
 			$_SESSION['success'][] = sprintf(lang('succ_updated'),lang('profile'));
-		}
 
+			/**
+			 * refresh 
+			 */
+
+			 redirect(u('/superadmin/member/edit?user_id=%d',$_GET['user_id']));
+		}
 		catch(Exception $e)
 		{
-		    mysqli_rollback($mysqli);
-		    
-		    $_SESSION['error'][] = $e->getMessage();
+			mysqli_rollback($mysqli);
+
+			$_SESSION['error'][] = $e->getMessage();
 		}
 	}
+
+	$posted = $_POST;
 }
 
 /**
@@ -302,13 +304,7 @@ if (isset($_POST['profile']))
 $usertitles = load_model('lists')->get('usertitle')->rows;
 
 /**
- * states
- */
-
-$states = load_model('lists')->get('state')->rows;
-
-/**
- * user
+ * $user
  */
 
 $user = load_model('superadmin/user')->user( $_GET['user_id'] )->row;
@@ -317,9 +313,20 @@ $user = load_model('superadmin/user')->user( $_GET['user_id'] )->row;
  * active page
  */
 
+$root = $active = '';
+
 if (strpos($_GET['route'], '/') !== false)
 {
-	list($root,$active) = explode('/', $_GET['route']);
+	list($root, $active) = explode('/', $_GET['route']);
+}
+
+if (in_array($acl['icp'], $_SESSION['acl']))
+{
+	$active = $root = 'profile';
+}
+else
+{
+	$root = 'admin'; $active = 'profile';
 }
 
 /**
@@ -328,7 +335,7 @@ if (strpos($_GET['route'], '/') !== false)
 
 $breadcrumbs[] = [
 	'text' 		=> lang('dashboard'),
-	'href'		=> u('/superadmin'),
+	'href'		=> u('admin'),
 	'is_active'	=> false
 ];
 
@@ -346,18 +353,23 @@ $breadcrumbs[] = [
 
 $scripts = [
 	u(TEMPLATE.'/jquery/jquery.ui.widget.js'),
-    u(TEMPLATE.'/jquery/jquery.iframe-transport.js'),
-    u(TEMPLATE.'/jquery/jquery.fileupload.js'),
-    u(TEMPLATE.'/olumis/js/profile/home.js')
+	u(TEMPLATE.'/jquery/jquery.iframe-transport.js'),
+	u(TEMPLATE.'/jquery/jquery.fileupload.js'),
+	u(TEMPLATE.'/olumis/js/profile/home.js')
 ];
 
 $data = [
-	'header'		=> tpl('header.tpl', ['title' => lang('edit_member'), 'root' => $root, 'active' => $active]),
-	'footer'		=> tpl('footer.tpl', [],false,$scripts),
+	'header'		=> tpl('header.tpl', ['title' => lang('profile'), 'root' => $root, 'active' => $active]),
+	'footer'		=> tpl('footer.tpl',[], false, $scripts),
 	'breadcrumbs'	=> $breadcrumbs,
+	'posted'		=> $posted,
 	'usertitles'	=> $usertitles,
-    'states'        => $states,
-	'user'     		=> $user
+	'user'			=> $user,
+	'dobyear'		=> date('Y')
 ];
 
 tpl('superadmin/member/edit.tpl', $data, true);
+
+
+
+

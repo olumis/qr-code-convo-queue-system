@@ -48,7 +48,7 @@ if (isset($_POST['upload']))
 		$deleteurl = u('/profile/delete-image?user_image_id=%d', $user_image_id);
 
 		$html = '<div class="thumb">  <a href="'.$deleteurl.'" class="close">&times;</a> <a class="thumbnail" href="'.$largeurl.'"><img class="img-responsive" src="'.$thumburl.'" alt=""></a></div>';
-
+		
 		$json = [
 			'status' => 'success',
 			'data'   => $html
@@ -79,6 +79,11 @@ function goodpost()
 	clean();
 
 	$_SESSION['error'] = [];
+
+	if (!isset($_POST['has_profile_pic']))
+	{
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('profile_picture'));
+	}
 
 	if (!isset($_POST['usertitle']) || !$_POST['usertitle'])
 	{

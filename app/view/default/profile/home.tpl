@@ -140,6 +140,12 @@
 						<a href="<?= u('/admin') ?>" class="btn btn-default cancel"><span class="fa fa-minus-circle fa-lg"></span> <?= lang('cancel') ?></a>
 					</div>
 				</div>
+
+				<?php if (isset($user['dimension']) && $user['dimension']) : ?>
+					<input type="hidden" name="has_profile_pic">
+				<?php else: ?>
+					<div id="has-profile-pic"></div>
+				<?php endif ?>
 			</form>
 		</div>
 	</div>

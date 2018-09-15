@@ -1,5 +1,7 @@
 <?php
 
+$_['is_administrator']  = 'Is Administrator';
+$_['administrator']     = 'Administrator';
 $_['student_name']      = 'Student Name';
 $_['go']                = 'Go';
 $_['id']                = 'ID';

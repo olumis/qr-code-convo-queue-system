@@ -1,6 +1,6 @@
 <?= $header ?>
 
-<div class="col-lg-offset-3 col-lg-6">
+<div class="col-lg-12">
 	<ol class="breadcrumb">
 		<?php foreach ($breadcrumbs as $breadcrumb) : ?>
 			<?php if (!$breadcrumb['is_active']) : ?>
@@ -12,7 +12,7 @@
 	</ol>
 </div>
 
-<div class="col-lg-offset-3 col-lg-6">
+<div class="col-lg-12">
 	<div class="panel shadow">
 		<div class="panel-body">
 		
@@ -46,6 +46,20 @@
 					<label class="col-sm-3 control-label"><?= lang('mobile_no') ?></label>
 					<div class="col-sm-9">
 						<div class="form-control"><?= $member['mobile_no'] ?></div>
+					</div>
+				</div>
+
+				<div class="form-group clearfix">
+					<label class="col-sm-3 control-label"><?= lang('student_id') ?></label>
+					<div class="col-sm-9">
+						<div class="form-control"><?= $member['student_id'] ?></div>
+					</div>
+				</div>
+
+				<div class="form-group clearfix">
+					<label class="col-sm-3 control-label"><?= lang('staff_id') ?></label>
+					<div class="col-sm-9">
+						<div class="form-control"><?= $member['staff_id'] ?></div>
 					</div>
 				</div>
 				

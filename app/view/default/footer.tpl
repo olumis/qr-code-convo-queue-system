@@ -36,7 +36,7 @@
 <script src="<?= u(TEMPLATE.'/bootstrap/js/bootstrap.min.js') ?>"></script>
 <script src="<?= u(TEMPLATE.'/bootstrap-select/js/bootstrap-select.min.js') ?>"></script>
 <script src="<?= u(TEMPLATE.'/bootstrap-notify/js/bootstrap-notify.min.js') ?>"></script>
-<script src="<?= u(TEMPLATE.'/instascan/js/instascan.min.js') ?>"></script>
+<script src="<?= u(TEMPLATE.'/instascan/js/instascan.min.js?') ?>"></script>
 <script src="<?= u('/js/config') ?>"></script>
 <script src="<?= u(TEMPLATE.'/default.js?'.time()) ?>"></script>
 <?php foreach ($scripts as $script) : ?>

@@ -12,7 +12,7 @@
 	</ol>
 </div>
 
-<div class="col-lg-3 col-md-6">
+<div class="col-lg-4 col-md-8">
 	<div class="panel shadow">
 		<div class="panel-body">
 			<div class="row">
@@ -20,7 +20,7 @@
 					<i class="fa fa-vcard-o fa-5x"></i>
 				</div>
 				<div class="col-xs-9 text-right">
-					<div class="huge"><?= sprintf('%s %s%s',lang('user_id'),'&#35;', $user['user_id']) ?></div>
+					<div class="huge"><?= sprintf('%s %s%d',lang('user_id'),'&#35;', $user['user_id']) ?></div>
 				</div>
 			</div>
 			<div><?= $user['email'] ?></div>
@@ -58,10 +58,10 @@
 	
 </div>
 
-<div class="col-lg-6 col-md-6">
+<div class="col-lg-8 col-md-8">
 	<div class="panel shadow">
 		<div class="panel-body">
-			<form action="<?= u('/superadmin/member/edit?user_id=%d',$user['user_id']) ?>" method="post" autocomplete="off" class="form-horizontal">
+			<form action="<?= u('/superadmin/member/edit?user_id=%d', $_GET['user_id']) ?>" method="post" autocomplete="off" class="form-horizontal">
 				<div class="row">
     				<hr>
     				<p class="lead"><?= lang('personal_details') ?></p>
@@ -92,30 +92,25 @@
 						<input type="text" name="mobile_no" placeholder="<?= lang('mobile_no') ?>" class="form-control" title="<?= lang('mobile_no') ?>" data-toggle="popover" data-content="Example:<br>0179553208" value="<?= $user['mobile_no'] ?>">
 					</div>
 				</div>
-				
-				<div class="row">
-    				<hr>
-    				<p class="lead"><?= lang('bank_details') ?></p>
-    			</div>
-    			
+
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('account_no') ?> </label>
+					<label class="col-sm-3 control-label"><?= lang('faculty') ?> </label>
 					<div class="col-sm-9">
-						<input type="text" name="account_no" placeholder="<?= lang('account_no') ?>" class="form-control" value="<?= $user['account_no'] ?>">
+						<input type="text" name="faculty" placeholder="<?= lang('faculty') ?>" class="form-control" title="<?= lang('faculty') ?>" value="<?= $user['faculty'] ?>">
 					</div>
 				</div>
-				
+
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('bank_name') ?> </label>
+					<label class="col-sm-3 control-label"><?= lang('student_id') ?> </label>
 					<div class="col-sm-9">
-						<input type="text" name="bank_name" placeholder="<?= lang('bank_name') ?>" class="form-control" value="<?= $user['bank_name'] ?>">
+						<input type="text" name="student_id" placeholder="<?= lang('student_id') ?>" class="form-control" title="<?= lang('student_id') ?>" value="<?= $user['student_id'] ?>">
 					</div>
 				</div>
-				
+
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('holder_name') ?> </label>
+					<label class="col-sm-3 control-label"><?= lang('staff_id') ?> </label>
 					<div class="col-sm-9">
-						<input type="text" name="holder_name" placeholder="<?= lang('holder_name') ?>" class="form-control" value="<?= $user['holder_name'] ?>">
+						<input type="text" name="staff_id" placeholder="<?= lang('staff_id') ?>" class="form-control" title="<?= lang('staff_id') ?>" value="<?= $user['staff_id'] ?>">
 					</div>
 				</div>
 				
@@ -137,18 +132,18 @@
 						<input type="password" name="password" placeholder="<?= lang('password') ?>" class="form-control">
 					</div>
 				</div>
-				
+
 				<div class="row">
     				<hr>
     				<p class="lead"><?= lang('system_details') ?></p>
     			</div>
-    			
+
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('is_marketer') ?> <span class="text-danger">*</span></label>
+					<label class="col-sm-3 control-label"><?= lang('is_administrator') ?> <span class="text-danger">*</span></label>
 					<div class="col-sm-9">
 					
-						<select name="is_marketer" class="selectpicker show-tick show-menu-arrow">
-            				<?php if ($user['is_marketer']) : ?>
+						<select name="is_superadmin" class="selectpicker show-tick show-menu-arrow">
+            				<?php if ($user['is_superadmin']) : ?>
             					<option value="1" selected><?= lang('yes') ?></option>
             					<option value="0"><?= lang('no') ?></option>
             				<?php else: ?>
@@ -167,6 +162,12 @@
 						<a href="<?= u('/superadmin/member') ?>" class="btn btn-default cancel"><span class="fa fa-minus-circle fa-lg"></span> <?= lang('cancel') ?></a>
 					</div>
 				</div>
+
+				<?php if (isset($user['dimension']) && $user['dimension']) : ?>
+					<input type="hidden" name="has_profile_pic">
+				<?php else: ?>
+					<div id="has-profile-pic"></div>
+				<?php endif ?>
 			</form>
 		</div>
 	</div>

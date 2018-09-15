@@ -94,6 +94,12 @@ $breadcrumbs[] = [
 ];
 
 $breadcrumbs[] = [
+	'text' 		=> lang('member'),
+	'href'		=> u('/superadmin/member/'),
+	'is_active'	=> false
+];
+
+$breadcrumbs[] = [
 	'text' 		=> lang('edit_member'),
 	'href'		=> u('/superadmin/member/edit?user_id=%d',$_GET['user_id']),
 	'is_active'	=> false
