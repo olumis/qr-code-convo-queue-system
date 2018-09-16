@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2018 at 05:58 PM
+-- Generation Time: Sep 16, 2018 at 10:46 AM
 -- Server version: 10.2.14-MariaDB-log
 -- PHP Version: 7.2.7
 
@@ -31,9 +31,26 @@ SET time_zone = "+00:00";
 CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `faculty` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_no` int(11) NOT NULL,
   `is_active` int(11) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`attendance_id`, `user_id`, `faculty`, `queue_no`, `is_active`, `created_at`) VALUES
+(1, 11, 'Engineering', 1, 0, '2018-09-16 01:03:19'),
+(2, 10, 'Engineering', 2, 0, '2018-09-16 01:03:31'),
+(3, 9, 'Engineering', 3, 0, '2018-09-16 01:03:36'),
+(4, 2, 'IT / Computer Sciences', 1, 0, '2018-09-16 01:03:43'),
+(5, 3, 'IT / Computer Sciences', 2, 0, '2018-09-16 01:03:48'),
+(6, 4, 'IT / Computer Sciences', 3, 0, '2018-09-16 01:03:54'),
+(7, 5, 'IT / Computer Sciences', 4, 0, '2018-09-16 01:04:00'),
+(8, 7, 'IT / Computer Sciences', 5, 0, '2018-09-16 01:04:07'),
+(9, 8, 'Engineering', 4, 0, '2018-09-16 01:04:13');
 
 -- --------------------------------------------------------
 
@@ -61,10 +78,37 @@ INSERT INTO `language` (`language_id`, `name`, `country`, `code`, `locale`, `fil
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `list_faculty`
+--
+
+CREATE TABLE `list_faculty` (
+  `faculty_id` int(11) NOT NULL,
+  `name` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `list_faculty`
+--
+
+INSERT INTO `list_faculty` (`faculty_id`, `name`) VALUES
+(1, 'Engineering'),
+(2, 'IT / Computer Sciences'),
+(3, 'Business / Management / Finance'),
+(4, 'Bioinformatics'),
+(5, 'Accounting'),
+(6, 'Law'),
+(7, 'Creative Multimedia'),
+(8, 'Cinematic Art'),
+(9, 'Communication');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `list_usertitle`
 --
 
 CREATE TABLE `list_usertitle` (
+  `usertitle_id` int(11) NOT NULL,
   `name` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -72,9 +116,9 @@ CREATE TABLE `list_usertitle` (
 -- Dumping data for table `list_usertitle`
 --
 
-INSERT INTO `list_usertitle` (`name`) VALUES
-('Mr'),
-('Ms');
+INSERT INTO `list_usertitle` (`usertitle_id`, `name`) VALUES
+(1, 'Mr'),
+(2, 'Ms');
 
 -- --------------------------------------------------------
 
@@ -99,7 +143,11 @@ INSERT INTO `page` (`page_id`, `page_name`, `page_content`, `page_seourl`, `crea
 (1, 'About Us', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rutrum et enim eu molestie. Donec sit amet nisi vel erat placerat sodales molestie vitae est. Praesent rutrum magna aliquam dictum condimentum. Etiam at congue enim, quis auctor enim. Sed tincidunt risus non velit gravida, ut fringilla sem hendrerit. Aenean tincidunt mollis massa ac bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla interdum ut massa vel rhoncus. Nulla mattis ipsum ac vestibulum dapibus. Integer tincidunt sit amet tellus vitae lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc tristique id diam sit amet sollicitudin. Proin varius ante cursus pretium maximus. Sed mi nibh, facilisis ut finibus elementum, laoreet id sapien. Vivamus lacinia diam a ipsum euismod lacinia. Nulla facilisi.</p><p><br></p><p>Morbi auctor lectus feugiat aliquet rhoncus. Duis quis odio bibendum, sodales neque ut, tempor nulla. Morbi nec ultricies ipsum. Pellentesque suscipit nunc quis turpis dapibus, at efficitur erat tincidunt. Etiam egestas neque vitae odio sollicitudin gravida. Vestibulum ut pretium nibh. Ut at risus sit amet quam maximus imperdiet ut a nisi. Sed cursus dui et lorem porttitor, in blandit lectus eleifend.</p><p><br></p><p>Curabitur imperdiet, lacus ac faucibus congue, sem neque elementum lectus, ut volutpat tellus tortor sit amet nibh. Quisque at dignissim purus. Sed non dolor hendrerit, posuere dolor eu, laoreet arcu. Proin turpis neque, lobortis eget nibh at, euismod pellentesque leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla sed porta nisl. Aliquam erat volutpat. Donec malesuada placerat augue, eu vulputate velit mattis eu. Morbi pharetra turpis vitae libero malesuada, non consequat nunc pretium. Vivamus congue justo et gravida venenatis. Sed dapibus sem et urna venenatis, at tristique ipsum dignissim. Phasellus in efficitur sem. Donec rhoncus sagittis feugiat. Nunc scelerisque risus eu diam varius porta.</p><p><br></p><p>Aliquam vulputate tristique nisi sit amet consequat. Donec dapibus sapien id sem varius, nec accumsan nulla pharetra. Sed egestas vestibulum bibendum. Vivamus massa tellus, sollicitudin ac nibh sit amet, lacinia tempor eros. Sed pellentesque luctus tempor. Pellentesque sed elit lorem. Cras vulputate, nisi tempor viverra laoreet, lacus magna volutpat ipsum, et maximus nibh metus a lorem. Phasellus mattis sodales sem. Aenean consectetur turpis velit, ac interdum orci elementum ut. Quisque viverra ultricies arcu, molestie molestie odio fermentum vestibulum. In scelerisque libero placerat ante mollis malesuada. Suspendisse nisl diam, sollicitudin eget elementum vitae, suscipit vitae neque. Morbi risus justo, convallis eget sapien et, gravida iaculis erat. Vestibulum sed accumsan nisl.</p><p><br></p><p>Pellentesque quis orci elit. Nulla id lacus at ex laoreet vestibulum eu vel nulla. Praesent sit amet turpis condimentum, imperdiet nunc quis, feugiat lorem. Vestibulum malesuada dui nibh, et ullamcorper eros molestie sit amet. Duis euismod iaculis nisl, sed placerat leo. Cras euismod mi ultrices, interdum mauris a, ullamcorper lectus. Phasellus convallis pharetra nibh, at tristique nisl. Donec libero nunc, tincidunt sed imperdiet eu, vestibulum vel orci.</p><div><br></div>', 'about-us', '2018-08-08 19:33:55', 1),
 (2, 'Terms and Condition', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rutrum et enim eu molestie. Donec sit amet nisi vel erat placerat sodales molestie vitae est. Praesent rutrum magna aliquam dictum condimentum. Etiam at congue enim, quis auctor enim. Sed tincidunt risus non velit gravida, ut fringilla sem hendrerit. Aenean tincidunt mollis massa ac bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla interdum ut massa vel rhoncus. Nulla mattis ipsum ac vestibulum dapibus. Integer tincidunt sit amet tellus vitae lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc tristique id diam sit amet sollicitudin. Proin varius ante cursus pretium maximus. Sed mi nibh, facilisis ut finibus elementum, laoreet id sapien. Vivamus lacinia diam a ipsum euismod lacinia. Nulla facilisi.</p><p><br></p><p>Morbi auctor lectus feugiat aliquet rhoncus. Duis quis odio bibendum, sodales neque ut, tempor nulla. Morbi nec ultricies ipsum. Pellentesque suscipit nunc quis turpis dapibus, at efficitur erat tincidunt. Etiam egestas neque vitae odio sollicitudin gravida. Vestibulum ut pretium nibh. Ut at risus sit amet quam maximus imperdiet ut a nisi. Sed cursus dui et lorem porttitor, in blandit lectus eleifend.</p><p><br></p><p>Curabitur imperdiet, lacus ac faucibus congue, sem neque elementum lectus, ut volutpat tellus tortor sit amet nibh. Quisque at dignissim purus. Sed non dolor hendrerit, posuere dolor eu, laoreet arcu. Proin turpis neque, lobortis eget nibh at, euismod pellentesque leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla sed porta nisl. Aliquam erat volutpat. Donec malesuada placerat augue, eu vulputate velit mattis eu. Morbi pharetra turpis vitae libero malesuada, non consequat nunc pretium. Vivamus congue justo et gravida venenatis. Sed dapibus sem et urna venenatis, at tristique ipsum dignissim. Phasellus in efficitur sem. Donec rhoncus sagittis feugiat. Nunc scelerisque risus eu diam varius porta.</p><p><br></p><p>Aliquam vulputate tristique nisi sit amet consequat. Donec dapibus sapien id sem varius, nec accumsan nulla pharetra. Sed egestas vestibulum bibendum. Vivamus massa tellus, sollicitudin ac nibh sit amet, lacinia tempor eros. Sed pellentesque luctus tempor. Pellentesque sed elit lorem. Cras vulputate, nisi tempor viverra laoreet, lacus magna volutpat ipsum, et maximus nibh metus a lorem. Phasellus mattis sodales sem. Aenean consectetur turpis velit, ac interdum orci elementum ut. Quisque viverra ultricies arcu, molestie molestie odio fermentum vestibulum. In scelerisque libero placerat ante mollis malesuada. Suspendisse nisl diam, sollicitudin eget elementum vitae, suscipit vitae neque. Morbi risus justo, convallis eget sapien et, gravida iaculis erat. Vestibulum sed accumsan nisl.</p><p><br></p><p>Pellentesque quis orci elit. Nulla id lacus at ex laoreet vestibulum eu vel nulla. Praesent sit amet turpis condimentum, imperdiet nunc quis, feugiat lorem. Vestibulum malesuada dui nibh, et ullamcorper eros molestie sit amet. Duis euismod iaculis nisl, sed placerat leo. Cras euismod mi ultrices, interdum mauris a, ullamcorper lectus. Phasellus convallis pharetra nibh, at tristique nisl. Donec libero nunc, tincidunt sed imperdiet eu, vestibulum vel orci.</p><div><br></div>', 'terms-and-condition', '2018-08-08 19:35:59', 1),
 (3, 'Privacy Policy', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rutrum et enim eu molestie. Donec sit amet nisi vel erat placerat sodales molestie vitae est. Praesent rutrum magna aliquam dictum condimentum. Etiam at congue enim, quis auctor enim. Sed tincidunt risus non velit gravida, ut fringilla sem hendrerit. Aenean tincidunt mollis massa ac bibendum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla interdum ut massa vel rhoncus. Nulla mattis ipsum ac vestibulum dapibus. Integer tincidunt sit amet tellus vitae lobortis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc tristique id diam sit amet sollicitudin. Proin varius ante cursus pretium maximus. Sed mi nibh, facilisis ut finibus elementum, laoreet id sapien. Vivamus lacinia diam a ipsum euismod lacinia. Nulla facilisi.</p><p><br></p><p>Morbi auctor lectus feugiat aliquet rhoncus. Duis quis odio bibendum, sodales neque ut, tempor nulla. Morbi nec ultricies ipsum. Pellentesque suscipit nunc quis turpis dapibus, at efficitur erat tincidunt. Etiam egestas neque vitae odio sollicitudin gravida. Vestibulum ut pretium nibh. Ut at risus sit amet quam maximus imperdiet ut a nisi. Sed cursus dui et lorem porttitor, in blandit lectus eleifend.</p><p><br></p><p>Curabitur imperdiet, lacus ac faucibus congue, sem neque elementum lectus, ut volutpat tellus tortor sit amet nibh. Quisque at dignissim purus. Sed non dolor hendrerit, posuere dolor eu, laoreet arcu. Proin turpis neque, lobortis eget nibh at, euismod pellentesque leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla sed porta nisl. Aliquam erat volutpat. Donec malesuada placerat augue, eu vulputate velit mattis eu. Morbi pharetra turpis vitae libero malesuada, non consequat nunc pretium. Vivamus congue justo et gravida venenatis. Sed dapibus sem et urna venenatis, at tristique ipsum dignissim. Phasellus in efficitur sem. Donec rhoncus sagittis feugiat. Nunc scelerisque risus eu diam varius porta.</p><p><br></p><p>Aliquam vulputate tristique nisi sit amet consequat. Donec dapibus sapien id sem varius, nec accumsan nulla pharetra. Sed egestas vestibulum bibendum. Vivamus massa tellus, sollicitudin ac nibh sit amet, lacinia tempor eros. Sed pellentesque luctus tempor. Pellentesque sed elit lorem. Cras vulputate, nisi tempor viverra laoreet, lacus magna volutpat ipsum, et maximus nibh metus a lorem. Phasellus mattis sodales sem. Aenean consectetur turpis velit, ac interdum orci elementum ut. Quisque viverra ultricies arcu, molestie molestie odio fermentum vestibulum. In scelerisque libero placerat ante mollis malesuada. Suspendisse nisl diam, sollicitudin eget elementum vitae, suscipit vitae neque. Morbi risus justo, convallis eget sapien et, gravida iaculis erat. Vestibulum sed accumsan nisl.</p><p><br></p><p>Pellentesque quis orci elit. Nulla id lacus at ex laoreet vestibulum eu vel nulla. Praesent sit amet turpis condimentum, imperdiet nunc quis, feugiat lorem. Vestibulum malesuada dui nibh, et ullamcorper eros molestie sit amet. Duis euismod iaculis nisl, sed placerat leo. Cras euismod mi ultrices, interdum mauris a, ullamcorper lectus. Phasellus convallis pharetra nibh, at tristique nisl. Donec libero nunc, tincidunt sed imperdiet eu, vestibulum vel orci.</p><div><br></div>', 'privacy-policy', '2018-08-08 19:36:25', 1),
-(4, '', '', '', '2018-09-14 14:39:13', 0);
+(4, '', '', '', '2018-09-14 14:39:13', 0),
+(5, '', '', '', '2018-09-15 19:38:15', 0),
+(6, '', '', '', '2018-09-15 20:22:34', 0),
+(7, '', '', '', '2018-09-15 20:25:54', 0),
+(8, '', '', '', '2018-09-15 21:53:03', 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +183,7 @@ INSERT INTO `user` (`user_id`, `email`, `password`, `qr_password`, `email_vsalt`
 (8, 'student07@gmail.com', '$2y$12$psKjc56aBVIMagrpwT0WIuAPklcxGG2KVHB4oQK9DNUSIl83z1LhC', 'fe6483e6716d15b5139922c10eb08c293efaf94be745355c38ebfddc5e04b505caf71ab6b3d5ecddc928870bd75583baafd9df64e7a32e974d22c363b2e44867', '6381c3c03a3e9f6492b26ad05e09da31', 'dd2ccbc3ca22db7459c0ca091a92ef52', 0, 0, 1, '2018-09-14 17:53:59'),
 (9, 'student08@gmail.com', '$2y$12$n3FNGgI1.tfxYmeLWQCrnup0KXG0kwvPIWR/8LhMaa.iLdWzIMPmC', '94923fd2fc9ea9019f33ee5089914001ced85d62eb0f8fba90a6024ad18cbaaf40da3fcd7618f95535ccfce210eab353f9794a6aafbad6f052454ce8c16690db', 'ab93644a94e60f59e692a3a466945f00', 'caed32bca2ad6ab4ef9bb4fc79df3263', 0, 0, 1, '2018-09-14 17:54:51'),
 (10, 'student09@gmail.com', '$2y$12$6i34KAnFTh3qHnS6RiHxIeHU.0/TS.Q8UI3zOiTENPkQdXR9OBS2a', '3f8c8e457ce72028ffe68e46696897a4c151200b141a4f3dc65bfe6cb5d61bdc7672a4904b0a5648da19b930412676d165e0c1846c12ee9e4ef9eb33a98d137c', '3c8a918a0f574a75280bce410cf17e2f', '67764d7de45d400b9f57352932020bfb', 0, 0, 1, '2018-09-14 17:55:37'),
-(11, 'student10@gmail.com', '$2y$12$hnXv96PApEuWDiBpFAgZH.TrCf1XsEV8uzJZHJNUsnILuBjUXPBWm', '000c3b44303b1d3d958631599e2457df5842664d6fca1320cc3491117ced586aa90402475169ad09837ceaa65e1775d116a22e429197bbaf7ac0d9517cba0c04', '6f9cf56d2f51ed1155e178590e9e94e9', '5d2810f5776a10164f4d789806fc9093', 0, 0, 1, '2018-09-14 17:56:22');
+(11, 'student10@gmail.com', '$2y$12$CQiOLe1cdHUr8r5Ycz90Xu4ZlFEO/8Ucs2RWCVkuXdWDYj/gdVTbC', '000c3b44303b1d3d958631599e2457df5842664d6fca1320cc3491117ced586aa90402475169ad09837ceaa65e1775d116a22e429197bbaf7ac0d9517cba0c04', '6f9cf56d2f51ed1155e178590e9e94e9', '5d2810f5776a10164f4d789806fc9093', 0, 0, 1, '2018-09-14 17:56:22');
 
 -- --------------------------------------------------------
 
@@ -191,26 +239,25 @@ CREATE TABLE `user_attr` (
   `fullname` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `mobile_no` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `faculty` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `student_id` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `staff_id` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
+  `student_id` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user_attr`
 --
 
-INSERT INTO `user_attr` (`user_attr_id`, `user_id`, `usertitle`, `fullname`, `mobile_no`, `faculty`, `student_id`, `staff_id`) VALUES
-(1, 1, 'Mr', 'Super Admin', '0179553208', 'FIT', '1011163151', ''),
-(2, 2, 'Ms', 'Student 01', '0179553208', 'FIT', '1011163151', ''),
-(3, 3, 'Ms', 'Student 02', '0179553208', 'FIT', '1011163151', ''),
-(4, 4, 'Ms', 'Student 03', '0179553208', 'FIT', '1011163151', ''),
-(5, 5, 'Ms', 'Student 04', '0179553208', 'FIT', '1011163151', ''),
-(6, 6, 'Ms', 'Student 05', '0179553208', 'FIT', '1011163151', ''),
-(7, 7, 'Ms', 'Student 06', '0179553208', 'FIT', '1011163151', ''),
-(8, 8, 'Ms', 'Student 07', '0179553208', 'FIT', '1011163151', ''),
-(9, 9, 'Ms', 'Student 08', '0179553208', 'FIT', '1011163151', ''),
-(10, 10, 'Ms', 'Student 09', '0179553208', 'FIT', '1011163151', ''),
-(11, 11, 'Mr', 'Student 10', '0179553208', 'FIT', '1011163151', '');
+INSERT INTO `user_attr` (`user_attr_id`, `user_id`, `usertitle`, `fullname`, `mobile_no`, `faculty`, `student_id`) VALUES
+(1, 1, 'MR', 'SUPER ADMIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(2, 2, 'MS', 'LEE YAN HUI', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(3, 3, 'MS', 'CHOO HING HOW', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(4, 4, 'MS', 'NURUL DYANA BT ZAINUDIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(5, 5, 'MS', 'WAN MARIA NADIA BT WAN ABDUL GHANI', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(6, 6, 'MS', 'N HALIMATUSSA ADIAH BT ASTOR NUDDIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(7, 7, 'MS', 'RASHIDATUL MUNIRAH BT HJ ABD RASHID', '0179553208', 'IT / Computer Sciences', '1011163151'),
+(8, 8, 'MS', 'TENGKU ZHAWANI BINTI TUNKU MANSOR', '0179553208', 'Engineering', '1011163151'),
+(9, 9, 'MS', 'RATHAA A/P ULAKANATHAN', '0179553208', 'Engineering', '1011163151'),
+(10, 10, 'MS', 'SARIFAH LIHAN', '0179553208', 'Engineering', '1011163151'),
+(11, 11, 'MS', 'HALIMATUN SAADIAH BINTI MOHD ZAINI', '0179553208', 'Engineering', '1011163151');
 
 -- --------------------------------------------------------
 
@@ -229,7 +276,6 @@ CREATE TABLE `user_image` (
 --
 
 INSERT INTO `user_image` (`user_image_id`, `user_id`, `dimension`) VALUES
-(1, 1, 'a:3:{s:5:\"large\";s:44:\"f660095f7c4447ae41b7265a01587cbf-600x750.jpg\";s:6:\"medium\";s:44:\"f660095f7c4447ae41b7265a01587cbf-500x625.jpg\";s:5:\"thumb\";s:44:\"f660095f7c4447ae41b7265a01587cbf-300x300.jpg\";}'),
 (2, 2, 'a:3:{s:5:\"large\";s:44:\"97ff3b01e17a97d75709a93dcb11ae23-600x397.jpg\";s:6:\"medium\";s:44:\"97ff3b01e17a97d75709a93dcb11ae23-500x331.jpg\";s:5:\"thumb\";s:44:\"97ff3b01e17a97d75709a93dcb11ae23-300x300.jpg\";}'),
 (3, 3, 'a:3:{s:5:\"large\";s:44:\"6b757060a4b8a3233878fd98782694fa-600x401.jpg\";s:6:\"medium\";s:44:\"6b757060a4b8a3233878fd98782694fa-500x334.jpg\";s:5:\"thumb\";s:44:\"6b757060a4b8a3233878fd98782694fa-300x300.jpg\";}'),
 (4, 4, 'a:3:{s:5:\"large\";s:44:\"6b4822b0fc23f1db9cfc7c8e1a4e6c4e-600x394.jpg\";s:6:\"medium\";s:44:\"6b4822b0fc23f1db9cfc7c8e1a4e6c4e-500x328.jpg\";s:5:\"thumb\";s:44:\"6b4822b0fc23f1db9cfc7c8e1a4e6c4e-300x300.jpg\";}'),
@@ -239,7 +285,8 @@ INSERT INTO `user_image` (`user_image_id`, `user_id`, `dimension`) VALUES
 (8, 8, 'a:3:{s:5:\"large\";s:44:\"55acba9e8cee0c0c3eb9e0ee719b2968-600x407.jpg\";s:6:\"medium\";s:44:\"55acba9e8cee0c0c3eb9e0ee719b2968-500x339.jpg\";s:5:\"thumb\";s:44:\"55acba9e8cee0c0c3eb9e0ee719b2968-300x300.jpg\";}'),
 (9, 9, 'a:3:{s:5:\"large\";s:44:\"5b9b1eca1dc7c872bac1428a20b8c715-600x401.jpg\";s:6:\"medium\";s:44:\"5b9b1eca1dc7c872bac1428a20b8c715-500x334.jpg\";s:5:\"thumb\";s:44:\"5b9b1eca1dc7c872bac1428a20b8c715-300x300.jpg\";}'),
 (10, 10, 'a:3:{s:5:\"large\";s:44:\"bfec887e8a7c6cf3fe3697768f1ca5e7-600x396.jpg\";s:6:\"medium\";s:44:\"bfec887e8a7c6cf3fe3697768f1ca5e7-500x330.jpg\";s:5:\"thumb\";s:44:\"bfec887e8a7c6cf3fe3697768f1ca5e7-300x300.jpg\";}'),
-(11, 11, 'a:3:{s:5:\"large\";s:44:\"1b1a0550ed19a3f2c762e18a0314bcc6-600x396.jpg\";s:6:\"medium\";s:44:\"1b1a0550ed19a3f2c762e18a0314bcc6-500x330.jpg\";s:5:\"thumb\";s:44:\"1b1a0550ed19a3f2c762e18a0314bcc6-300x300.jpg\";}');
+(16, 1, 'a:3:{s:5:\"large\";s:44:\"02e253150f5a0958a8e7c702508e982b-600x375.jpg\";s:6:\"medium\";s:44:\"02e253150f5a0958a8e7c702508e982b-500x312.jpg\";s:5:\"thumb\";s:44:\"02e253150f5a0958a8e7c702508e982b-300x300.jpg\";}'),
+(18, 11, 'a:3:{s:5:\"large\";s:44:\"a7bd1f2dc666116c8ea708e152128860-600x315.jpg\";s:6:\"medium\";s:44:\"a7bd1f2dc666116c8ea708e152128860-500x262.jpg\";s:5:\"thumb\";s:44:\"a7bd1f2dc666116c8ea708e152128860-300x300.jpg\";}');
 
 --
 -- Indexes for dumped tables
@@ -256,6 +303,18 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `language`
   ADD PRIMARY KEY (`language_id`);
+
+--
+-- Indexes for table `list_faculty`
+--
+ALTER TABLE `list_faculty`
+  ADD PRIMARY KEY (`faculty_id`);
+
+--
+-- Indexes for table `list_usertitle`
+--
+ALTER TABLE `list_usertitle`
+  ADD PRIMARY KEY (`usertitle_id`);
 
 --
 -- Indexes for table `page`
@@ -295,7 +354,7 @@ ALTER TABLE `user_image`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `language`
@@ -304,10 +363,22 @@ ALTER TABLE `language`
   MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `list_faculty`
+--
+ALTER TABLE `list_faculty`
+  MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `list_usertitle`
+--
+ALTER TABLE `list_usertitle`
+  MODIFY `usertitle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -319,7 +390,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_acl`
 --
 ALTER TABLE `user_acl`
-  MODIFY `user_acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `user_acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user_attr`
@@ -331,7 +402,7 @@ ALTER TABLE `user_attr`
 -- AUTO_INCREMENT for table `user_image`
 --
 ALTER TABLE `user_image`
-  MODIFY `user_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
