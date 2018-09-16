@@ -35,19 +35,19 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th><?= lang('queue_no') ?></th>
                             <th><?= lang('fullname') ?></th>
                             <th><?= lang('faculty') ?></th>
                             <th><?= lang('id') ?></th>
-                            <th><?= lang('queue_no') ?></th>
                         </tr>
                     </thead>
                     <tbody id="confirmed-student">
                         <?php foreach($students as $student) : ?>
                             <tr data-user-id="<?= $student['user_id'] ?>">
+                                <td><?= $student['queue_no'] ?></td>
                                 <td><?= $student['fullname'] ?></td>
                                 <td><?= $student['faculty'] ?></td>
                                 <td><?= $student['student_id'] ?></td>
-                                <td><?= $student['queue_no'] ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

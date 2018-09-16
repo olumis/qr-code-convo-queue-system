@@ -40,7 +40,7 @@ $(function()
 
                     $.each(response.students, function(i)
                     {
-                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td><td>'+ response.students[i].queue_no +'</td></tr>'
+                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].queue_no +'</td><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
                     })
 
                     cs.append(students)

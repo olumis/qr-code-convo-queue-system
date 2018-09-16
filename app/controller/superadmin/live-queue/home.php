@@ -76,7 +76,7 @@ if (isset($_POST['go']) && (isset($_POST['user_id']) && $_POST['user_id']))
     $activated_student = load_model('superadmin/user')->user($_POST['user_id'])->row;
 
     $json = [
-        'id'        => sprintf('confirmed.student'),
+        'id'        => sprintf('activated.student'),
         'students'  => $confirmed_students, // list of confirmed but inactive students
         'astudent'  => $activated_student // active student
     ];
@@ -102,7 +102,7 @@ if (isset($_POST['reset']))
     $confirmed_students = load_model('superadmin/attendance')->students()->rows;
 
     $json = [
-        'id'        => sprintf('confirmed.student'),
+        'id'        => sprintf('reseted.student'),
         'students'  => $confirmed_students,
         'reset'     => true
     ];
@@ -143,7 +143,7 @@ $breadcrumbs[] = [
 ];
 
 $scripts = [
-    u(TEMPLATE.'/olumis/js/superadmin/attendance/home.js')
+    u(TEMPLATE.'/olumis/js/superadmin/live-queue/home.js')
 ];
 
 $data = [
@@ -153,4 +153,4 @@ $data = [
     'students'      => $students
 ];
 
-tpl('superadmin/attendance/home.tpl', $data,  true);
+tpl('superadmin/live-queue/home.tpl', $data,  true);
