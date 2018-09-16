@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 10:46 AM
+-- Generation Time: Sep 16, 2018 at 05:03 PM
 -- Server version: 10.2.14-MariaDB-log
 -- PHP Version: 7.2.7
 
@@ -36,21 +36,6 @@ CREATE TABLE `attendance` (
   `is_active` int(11) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`attendance_id`, `user_id`, `faculty`, `queue_no`, `is_active`, `created_at`) VALUES
-(1, 11, 'Engineering', 1, 0, '2018-09-16 01:03:19'),
-(2, 10, 'Engineering', 2, 0, '2018-09-16 01:03:31'),
-(3, 9, 'Engineering', 3, 0, '2018-09-16 01:03:36'),
-(4, 2, 'IT / Computer Sciences', 1, 0, '2018-09-16 01:03:43'),
-(5, 3, 'IT / Computer Sciences', 2, 0, '2018-09-16 01:03:48'),
-(6, 4, 'IT / Computer Sciences', 3, 0, '2018-09-16 01:03:54'),
-(7, 5, 'IT / Computer Sciences', 4, 0, '2018-09-16 01:04:00'),
-(8, 7, 'IT / Computer Sciences', 5, 0, '2018-09-16 01:04:07'),
-(9, 8, 'Engineering', 4, 0, '2018-09-16 01:04:13');
 
 -- --------------------------------------------------------
 
@@ -354,7 +339,7 @@ ALTER TABLE `user_image`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `language`
