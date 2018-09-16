@@ -77,7 +77,17 @@
 				<div class="form-group clearfix">
 					<label class="col-sm-3 control-label"><?= lang('faculty') ?> <span class="text-danger">*</span></label>
 					<div class="col-sm-9">
-						<input type="text" name="faculty" placeholder="<?= lang('faculty') ?>" class="form-control" title="<?= lang('faculty') ?>" value="<?= (isset($posted['faculty'])) ? $posted['faculty'] : $user['faculty'] ?>">
+						<select name="faculty" class="selectpicker show-tick show-menu-arrow">
+							<option value=""><?= sprintf(lang('select_s'),lang('faculty')) ?></option>
+							<?php foreach ($faculties as $faculty) : ?>
+								<?php if (isset($posted['faculty'])) : ?>
+									<option value="<?= $faculty['name'] ?>" <?= $posted['faculty'] == $faculty['name'] ? 'selected' :'' ?>><?= $faculty['name'] ?></option>
+								<?php else : ?>
+									<option value="<?= $faculty['name'] ?>" <?= $user['faculty'] == $faculty['name'] ? 'selected' :'' ?>><?= $faculty['name'] ?></option>
+								<?php endif ?>
+								
+							<?php endforeach ?>
+						</select>
 					</div>
 				</div>
 

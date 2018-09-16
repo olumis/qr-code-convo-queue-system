@@ -280,6 +280,12 @@ if (isset($_POST['profile']))
 }
 
 /**
+ * faculties
+ */
+
+$faculties = load_model('lists')->get('faculty')->rows;
+
+/**
  * $user
  */
 
@@ -339,7 +345,8 @@ $data = [
 	'footer'		=> tpl('footer.tpl',[], false, $scripts),
 	'breadcrumbs'	=> $breadcrumbs,
 	'posted'		=> $posted,
-	'user'			=> $user
+	'user'			=> $user,
+	'faculties'		=> $faculties
 ];
 
 tpl('superadmin/member/edit.tpl', $data, true);
