@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2018 at 05:03 PM
+-- Generation Time: Sep 16, 2018 at 11:15 PM
 -- Server version: 10.2.14-MariaDB-log
 -- PHP Version: 7.2.7
 
@@ -89,25 +89,6 @@ INSERT INTO `list_faculty` (`faculty_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list_usertitle`
---
-
-CREATE TABLE `list_usertitle` (
-  `usertitle_id` int(11) NOT NULL,
-  `name` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `list_usertitle`
---
-
-INSERT INTO `list_usertitle` (`usertitle_id`, `name`) VALUES
-(1, 'Mr'),
-(2, 'Ms');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `page`
 --
 
@@ -168,7 +149,8 @@ INSERT INTO `user` (`user_id`, `email`, `password`, `qr_password`, `email_vsalt`
 (8, 'student07@gmail.com', '$2y$12$psKjc56aBVIMagrpwT0WIuAPklcxGG2KVHB4oQK9DNUSIl83z1LhC', 'fe6483e6716d15b5139922c10eb08c293efaf94be745355c38ebfddc5e04b505caf71ab6b3d5ecddc928870bd75583baafd9df64e7a32e974d22c363b2e44867', '6381c3c03a3e9f6492b26ad05e09da31', 'dd2ccbc3ca22db7459c0ca091a92ef52', 0, 0, 1, '2018-09-14 17:53:59'),
 (9, 'student08@gmail.com', '$2y$12$n3FNGgI1.tfxYmeLWQCrnup0KXG0kwvPIWR/8LhMaa.iLdWzIMPmC', '94923fd2fc9ea9019f33ee5089914001ced85d62eb0f8fba90a6024ad18cbaaf40da3fcd7618f95535ccfce210eab353f9794a6aafbad6f052454ce8c16690db', 'ab93644a94e60f59e692a3a466945f00', 'caed32bca2ad6ab4ef9bb4fc79df3263', 0, 0, 1, '2018-09-14 17:54:51'),
 (10, 'student09@gmail.com', '$2y$12$6i34KAnFTh3qHnS6RiHxIeHU.0/TS.Q8UI3zOiTENPkQdXR9OBS2a', '3f8c8e457ce72028ffe68e46696897a4c151200b141a4f3dc65bfe6cb5d61bdc7672a4904b0a5648da19b930412676d165e0c1846c12ee9e4ef9eb33a98d137c', '3c8a918a0f574a75280bce410cf17e2f', '67764d7de45d400b9f57352932020bfb', 0, 0, 1, '2018-09-14 17:55:37'),
-(11, 'student10@gmail.com', '$2y$12$CQiOLe1cdHUr8r5Ycz90Xu4ZlFEO/8Ucs2RWCVkuXdWDYj/gdVTbC', '000c3b44303b1d3d958631599e2457df5842664d6fca1320cc3491117ced586aa90402475169ad09837ceaa65e1775d116a22e429197bbaf7ac0d9517cba0c04', '6f9cf56d2f51ed1155e178590e9e94e9', '5d2810f5776a10164f4d789806fc9093', 0, 0, 1, '2018-09-14 17:56:22');
+(11, 'student10@gmail.com', '$2y$12$MgTmPVNQTWrujO25P1/hgeZryb.5mLNQyr1uTKZheYRs/K8Ulmx8.', '000c3b44303b1d3d958631599e2457df5842664d6fca1320cc3491117ced586aa90402475169ad09837ceaa65e1775d116a22e429197bbaf7ac0d9517cba0c04', '6f9cf56d2f51ed1155e178590e9e94e9', '5d2810f5776a10164f4d789806fc9093', 0, 0, 1, '2018-09-14 17:56:22'),
+(13, 'student11@gmail.com', '$2y$12$uSGOdA4/xUfzi50swHhzz.O3a6pfg2FLhBlSaiC4bzff2EgXOyvga', '', 'ed1218f45e89e7e162a1038f92c13eb5', '255368b254d658aebca622b7eae9debf', 0, 0, 1, '2018-09-16 23:09:53');
 
 -- --------------------------------------------------------
 
@@ -209,7 +191,9 @@ INSERT INTO `user_acl` (`user_acl_id`, `user_id`, `acl_id`) VALUES
 (29, 10, 1),
 (31, 10, 3),
 (32, 11, 1),
-(34, 11, 3);
+(34, 11, 3),
+(36, 13, 1),
+(37, 13, 2);
 
 -- --------------------------------------------------------
 
@@ -220,9 +204,7 @@ INSERT INTO `user_acl` (`user_acl_id`, `user_id`, `acl_id`) VALUES
 CREATE TABLE `user_attr` (
   `user_attr_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `usertitle` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `fullname` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mobile_no` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `faculty` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `student_id` tinytext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -231,18 +213,19 @@ CREATE TABLE `user_attr` (
 -- Dumping data for table `user_attr`
 --
 
-INSERT INTO `user_attr` (`user_attr_id`, `user_id`, `usertitle`, `fullname`, `mobile_no`, `faculty`, `student_id`) VALUES
-(1, 1, 'MR', 'SUPER ADMIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(2, 2, 'MS', 'LEE YAN HUI', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(3, 3, 'MS', 'CHOO HING HOW', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(4, 4, 'MS', 'NURUL DYANA BT ZAINUDIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(5, 5, 'MS', 'WAN MARIA NADIA BT WAN ABDUL GHANI', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(6, 6, 'MS', 'N HALIMATUSSA ADIAH BT ASTOR NUDDIN', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(7, 7, 'MS', 'RASHIDATUL MUNIRAH BT HJ ABD RASHID', '0179553208', 'IT / Computer Sciences', '1011163151'),
-(8, 8, 'MS', 'TENGKU ZHAWANI BINTI TUNKU MANSOR', '0179553208', 'Engineering', '1011163151'),
-(9, 9, 'MS', 'RATHAA A/P ULAKANATHAN', '0179553208', 'Engineering', '1011163151'),
-(10, 10, 'MS', 'SARIFAH LIHAN', '0179553208', 'Engineering', '1011163151'),
-(11, 11, 'MS', 'HALIMATUN SAADIAH BINTI MOHD ZAINI', '0179553208', 'Engineering', '1011163151');
+INSERT INTO `user_attr` (`user_attr_id`, `user_id`, `fullname`, `faculty`, `student_id`) VALUES
+(1, 1, 'Super Admin', 'IT / Computer Sciences', '1011163151'),
+(2, 2, 'LEE YAN HUI', 'IT / Computer Sciences', '1011163151'),
+(3, 3, 'CHOO HING HOW', 'IT / Computer Sciences', '1011163151'),
+(4, 4, 'NURUL DYANA BT ZAINUDIN', 'IT / Computer Sciences', '1011163151'),
+(5, 5, 'WAN MARIA NADIA BT WAN ABDUL GHANI', 'IT / Computer Sciences', '1011163151'),
+(6, 6, 'N HALIMATUSSA ADIAH BT ASTOR NUDDIN', 'IT / Computer Sciences', '1011163151'),
+(7, 7, 'RASHIDATUL MUNIRAH BT HJ ABD RASHID', 'IT / Computer Sciences', '1011163151'),
+(8, 8, 'TENGKU ZHAWANI BINTI TUNKU MANSOR', 'Engineering', '1011163151'),
+(9, 9, 'RATHAA A/P ULAKANATHAN', 'Engineering', '1011163151'),
+(10, 10, 'SARIFAH LIHAN', 'Engineering', '1011163151'),
+(11, 11, 'HALIMATUN SAADIAH BINTI MOHD ZAINI', 'Engineering', '1011163151'),
+(12, 13, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -294,12 +277,6 @@ ALTER TABLE `language`
 --
 ALTER TABLE `list_faculty`
   ADD PRIMARY KEY (`faculty_id`);
-
---
--- Indexes for table `list_usertitle`
---
-ALTER TABLE `list_usertitle`
-  ADD PRIMARY KEY (`usertitle_id`);
 
 --
 -- Indexes for table `page`
@@ -354,12 +331,6 @@ ALTER TABLE `list_faculty`
   MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `list_usertitle`
---
-ALTER TABLE `list_usertitle`
-  MODIFY `usertitle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
@@ -369,19 +340,19 @@ ALTER TABLE `page`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_acl`
 --
 ALTER TABLE `user_acl`
-  MODIFY `user_acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `user_attr`
 --
 ALTER TABLE `user_attr`
-  MODIFY `user_attr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_attr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_image`
