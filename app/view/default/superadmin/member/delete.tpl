@@ -34,18 +34,18 @@
 						<div class="form-control"><?= $member['email'] ?></div>
 					</div>
 				</div>
-			
+
 				<div class="form-group clearfix">
 					<label class="col-sm-3 control-label"><?= lang('fullname') ?></label>
 					<div class="col-sm-9">
-						<div class="form-control"><?= sprintf("%s %s", $member['usertitle'], $member['fullname']) ?></div>
+						<div class="form-control"><?= $member['fullname'] ?></div>
 					</div>
 				</div>
-				
+
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('mobile_no') ?></label>
+					<label class="col-sm-3 control-label"><?= lang('faculty') ?></label>
 					<div class="col-sm-9">
-						<div class="form-control"><?= $member['mobile_no'] ?></div>
+						<div class="form-control"><?= $member['faculty'] ?></div>
 					</div>
 				</div>
 
@@ -53,13 +53,6 @@
 					<label class="col-sm-3 control-label"><?= lang('student_id') ?></label>
 					<div class="col-sm-9">
 						<div class="form-control"><?= $member['student_id'] ?></div>
-					</div>
-				</div>
-
-				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('staff_id') ?></label>
-					<div class="col-sm-9">
-						<div class="form-control"><?= $member['staff_id'] ?></div>
 					</div>
 				</div>
 				

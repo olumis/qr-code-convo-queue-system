@@ -65,55 +65,29 @@
 				<div class="row">
     				<hr>
     				<p class="lead"><?= lang('personal_details') ?></p>
-    			</div>
-    			
-    			<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('usertitle') ?> <span class="text-danger">*</span></label>
-					<div class="col-sm-9">
-						<select name="usertitle" class="selectpicker show-tick show-menu-arrow">
-							<option value=""><?= sprintf(lang('select_s'),lang('usertitle')) ?></option>
-							<?php foreach ($usertitles as $usertitle) : ?>
-								<option value="<?= $usertitle['name'] ?>" <?= $user['usertitle'] == $usertitle['name'] ? 'selected' :'' ?>><?= $usertitle['name'] ?></option>
-							<?php endforeach ?>
-						</select>
-					</div>
 				</div>
-    			
+				
     			<div class="form-group clearfix">
 					<label class="col-sm-3 control-label"><?= lang('fullname') ?> <span class="text-danger">*</span></label>
 					<div class="col-sm-9">
 						<input type="text" name="fullname" placeholder="<?= lang('fullname') ?>" class="form-control" value="<?= $user['fullname'] ?>">
 					</div>
 				</div>
-				
-				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('mobile_no') ?> <span class="text-danger">*</span></label>
-					<div class="col-sm-9">
-						<input type="text" name="mobile_no" placeholder="<?= lang('mobile_no') ?>" class="form-control" title="<?= lang('mobile_no') ?>" data-toggle="popover" data-content="Example:<br>0179553208" value="<?= $user['mobile_no'] ?>">
-					</div>
-				</div>
 
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('faculty') ?> </label>
+					<label class="col-sm-3 control-label"><?= lang('faculty') ?> <span class="text-danger">*</span></label>
 					<div class="col-sm-9">
 						<input type="text" name="faculty" placeholder="<?= lang('faculty') ?>" class="form-control" title="<?= lang('faculty') ?>" value="<?= $user['faculty'] ?>">
 					</div>
 				</div>
 
 				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('student_id') ?> </label>
+					<label class="col-sm-3 control-label"><?= lang('student_id') ?> <span class="text-danger">*</span></label>
 					<div class="col-sm-9">
 						<input type="text" name="student_id" placeholder="<?= lang('student_id') ?>" class="form-control" title="<?= lang('student_id') ?>" value="<?= $user['student_id'] ?>">
 					</div>
 				</div>
 
-				<div class="form-group clearfix">
-					<label class="col-sm-3 control-label"><?= lang('staff_id') ?> </label>
-					<div class="col-sm-9">
-						<input type="text" name="staff_id" placeholder="<?= lang('staff_id') ?>" class="form-control" title="<?= lang('staff_id') ?>" value="<?= $user['staff_id'] ?>">
-					</div>
-				</div>
-				
     			<div class="row">
     				<hr>
     				<p class="lead"><?= lang('login_details') ?></p>

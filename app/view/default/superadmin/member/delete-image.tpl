@@ -27,7 +27,7 @@
             <form action="<?= sprintf(u('/').'superadmin/member/delete-image?user_image_id=%d&user_id=%d', $image['user_image_id'], $image['user_id']) ?>" method="post" autocomplete="off" class="form-horizontal">				
                 <div class="control-group">
                     <button type="submit" name="user_image" class="btn btn-success"><i class="fa fa-check-circle fa-lg"></i> <?= lang('submit') ?></button>
-                    <a class="btn btn-default" href="<?= u('/profile') ?>"><i class="fa fa-minus-circle fa-lg"></i> <?= lang('cancel') ?></a>
+                    <a class="btn btn-default" href="<?= u('/superadmin/member/edit?user_id=%d', $image['user_id']) ?>"><i class="fa fa-minus-circle fa-lg"></i> <?= lang('cancel') ?></a>
                 </div>
             </form>
         </div>

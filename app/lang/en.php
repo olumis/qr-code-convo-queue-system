@@ -19,7 +19,7 @@ $_['qr_code_save']      = 'Please save this qr code in your mobile phone. You wi
 $_['qr_code_pass']      = 'Your qr code contains sensitive information. Do not share this qr code to anyone.';
 $_['qr_code']           = 'QR CODE';
 $_['edit_profile']      = 'Edit Profile';
-$_['currently_logged_as'] = 'Currently logged in as <a href="/profile">%s %s</a>';
+$_['currently_logged_as'] = 'Currently logged in as <a href="/profile">%s</a>';
 $_['information']       = 'Information';
 $_['short_lorem']       = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 $_['slogan']            = $_['short_lorem'];

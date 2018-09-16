@@ -782,7 +782,6 @@ function loginemail($email, $password)
 		u.email,
 		u.password,
 		u.is_superadmin,
-        ua.usertitle,
         ua.fullname
             
 	FROM user u

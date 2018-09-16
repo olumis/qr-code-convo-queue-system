@@ -125,7 +125,7 @@
 
 		<?php if (is_logged() && (isset($_SESSION['user']['fullname']) && $_SESSION['user']['fullname'])) : ?>
 			<div class="currently-logged-as">
-				<p><?= sprintf(lang('currently_logged_as'),$_SESSION['user']['usertitle'], $_SESSION['user']['fullname']) ?></p>
+				<p><?= sprintf(lang('currently_logged_as'),$_SESSION['user']['fullname']) ?></p>
 			</div>
 		<?php endif ?>
 

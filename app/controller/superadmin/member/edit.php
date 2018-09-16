@@ -85,26 +85,19 @@ function goodpost()
 		$_SESSION['error'][] = sprintf(lang('err_required'),lang('profile_picture'));
 	}
 
-	if (!isset($_POST['usertitle']) || !$_POST['usertitle'])
-	{
-		$_SESSION['error'][] = sprintf(lang('err_required'),lang('usertitle'));
-	}
-
 	if (!isset($_POST['fullname']) || !$_POST['fullname'])
 	{
 		$_SESSION['error'][] = sprintf(lang('err_required'),lang('fullname'));
 	}
-	
-	if (!isset($_POST['mobile_no']) || !$_POST['mobile_no'])
+
+	if (!isset($_POST['faculty']) || !$_POST['faculty'])
 	{
-		$_SESSION['error'][] = sprintf(lang('err_required'),lang('mobile_no'));
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('faculty'));
 	}
-	else
+
+	if (!isset($_POST['student_id']) || !$_POST['student_id'])
 	{
-		if (!preg_match('/^[0-9]{7,}$/', $_POST['mobile_no']))
-		{
-			$_SESSION['error'][] = sprintf(lang('err_format'),lang('mobile_no'));
-		}
+		$_SESSION['error'][] = sprintf(lang('err_required'),lang('student_id'));
 	}
 
 	if ($_SESSION['error']) return false;
@@ -219,24 +212,13 @@ if (isset($_POST['profile']))
 			 */
 				
 			$user_attr = [
-			    'usertitle'		=> $_POST['usertitle'],
 			    'fullname'		=> $_POST['fullname'],
-			    'mobile_no'		=> $_POST['mobile_no'],
 			    'faculty'		=> $_POST['faculty'],
 			    'student_id'	=> $_POST['student_id'],
-			    'staff_id'		=> $_POST['staff_id']
 			];
 				
 			db_update('user_attr', $user_attr, ['user_id' => $user_id]);
-			
-			/**
-			 * update $_SESSION['user']
-			 */
-			
-			$_SESSION['user']['usertitle'] = $_POST['usertitle'];
-			
-			$_SESSION['user']['fullname'] = $_POST['fullname'];
-			
+
 			/**
 			 * acl
 			 * - delete 'icp'
@@ -298,12 +280,6 @@ if (isset($_POST['profile']))
 }
 
 /**
- * usertitles
- */
-
-$usertitles = load_model('lists')->get('usertitle')->rows;
-
-/**
  * $user
  */
 
@@ -326,7 +302,7 @@ if (in_array($acl['icp'], $_SESSION['acl']))
 }
 else
 {
-	$root = 'admin'; $active = 'profile';
+	$root = 'superadmin'; $active = 'profile';
 }
 
 /**
@@ -363,9 +339,7 @@ $data = [
 	'footer'		=> tpl('footer.tpl',[], false, $scripts),
 	'breadcrumbs'	=> $breadcrumbs,
 	'posted'		=> $posted,
-	'usertitles'	=> $usertitles,
-	'user'			=> $user,
-	'dobyear'		=> date('Y')
+	'user'			=> $user
 ];
 
 tpl('superadmin/member/edit.tpl', $data, true);

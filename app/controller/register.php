@@ -88,12 +88,9 @@ if (isset($_POST['register']))
 			
 			$user_attr = [
 				'user_id'		=> $user_id,
-				'usertitle'		=> 0,
 				'fullname'		=> '',
-				'mobile_no'		=> '',
 				'faculty'		=> '',
 				'student_id'	=> '',
-				'staff_id'		=> ''
 			];
 			
 			db_insert('user_attr', $user_attr);

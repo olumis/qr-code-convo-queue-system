@@ -37,11 +37,10 @@
 				<?php endif ?>
 				
 				<ul class="list-group">
-					<li class="list-group-item"><?= lang('fullname') ?><br><?= sprintf("%s %s", $user['usertitle'], $user['fullname']) ?></li>
-					<li class="list-group-item"><?= lang('mobile_no') ?><br><?= $user['mobile_no'] ?></li>
+					<li class="list-group-item"><?= lang('fullname') ?><br><?= $user['fullname'] ?></li>
 					<li class="list-group-item"><?= lang('email') ?><br><?= $user['email'] ?></li>
 					<li class="list-group-item"><?= lang('faculty') ?><br><?= ucfirst($user['faculty']) ?></li>
-					<?php if ($user['student_id']) : ?><li class="list-group-item"><?= lang('student_id') ?><br><?= $user['student_id'] ?></li><?php endif ?>
+					<li class="list-group-item"><?= lang('student_id') ?><br><?= ucfirst($user['student_id']) ?></li>
 				</ul>
 			</div>
 		</div>

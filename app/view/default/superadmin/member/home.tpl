@@ -38,7 +38,7 @@
 									<a href="<?= u('/superadmin/member/delete?user_id=%d', $member['user_id']) ?>" class="btn btn-default" title="<?= lang('delete') ?>"><i class="fa fa-times-circle fa-2x"></i></a>
 								</td>
 								<td><?= (($page-1)*PAGE_LIMIT)+($i+1) ?></td>
-								<td><?= sprintf('%s %s', $member['usertitle'], $member['fullname']) ?></td>
+								<td><?= $member['fullname'] ?></td>
 								<td><?= $member['faculty'] ?></td>
 								<td><?= $member['student_id'] ?></td>
 								<td>
