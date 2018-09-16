@@ -1,5 +1,6 @@
 <?php
 
+$_['no_item']           = 'There is no item in this list';
 $_['queue_no']          = 'Queue No';
 $_['delete_faculty']    = 'Delete Faculty';
 $_['add_faculty']       = 'Add Faculty';

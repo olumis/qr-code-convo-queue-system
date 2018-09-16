@@ -51,8 +51,6 @@ $(function()
                         faculty.html('Faculty')
 
                         profile_pic.html(img)
-
-                        csc.scrollTop(0)
                     })
                 }
             })
@@ -88,10 +86,6 @@ $(function()
 
         $.post(location.href, {'reset':''}, function() {})
     })
-
-    // table
-
-    $('table').scrollTableBody();
 })
 
 function update_student_list(response)

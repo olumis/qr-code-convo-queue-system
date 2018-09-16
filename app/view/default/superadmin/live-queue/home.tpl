@@ -17,7 +17,7 @@
 		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
             <hr>
-            <div class="table-responsive">
+            <div class="table-responsive" id="confirmed-student-container">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -28,14 +28,20 @@
                         </tr>
                     </thead>
                     <tbody id="confirmed-student">
-                        <?php foreach($students as $student) : ?>
-                            <tr data-user-id="<?= $student['user_id'] ?>">
-                                <td><?= $student['queue_no'] ?></td>
-                                <td><?= $student['fullname'] ?></td>
-                                <td><?= $student['faculty'] ?></td>
-                                <td><?= $student['student_id'] ?></td>
+                        <?php if ($students) : ?>
+                            <?php foreach($students as $student) : ?>
+                                <tr data-user-id="<?= $student['user_id'] ?>">
+                                    <td><?= $student['queue_no'] ?></td>
+                                    <td><?= $student['fullname'] ?></td>
+                                    <td><?= $student['faculty'] ?></td>
+                                    <td><?= $student['student_id'] ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        <?php else :?>
+                            <tr>
+                                <td colspan="10"><small><em><?= lang('no_item') ?></em></small></td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endif ?>
                     </tbody>
                 </table>
             </div>
