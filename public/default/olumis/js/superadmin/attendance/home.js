@@ -53,6 +53,8 @@ $(function()
 
 function update_student_list(response)
 {
+    let csc = $('#confirmed-student-container')
+
     let cs = $('#confirmed-student')
 
     if (typeof response.students !== 'undefined')
@@ -67,5 +69,7 @@ function update_student_list(response)
         })
 
         cs.append(students)
+
+        csc.scrollTop(9999)
     }
 }
