@@ -42,7 +42,6 @@
 					<li class="list-group-item"><?= lang('email') ?><br><?= $user['email'] ?></li>
 					<li class="list-group-item"><?= lang('faculty') ?><br><?= ucfirst($user['faculty']) ?></li>
 					<?php if ($user['student_id']) : ?><li class="list-group-item"><?= lang('student_id') ?><br><?= $user['student_id'] ?></li><?php endif ?>
-					<?php if ($user['staff_id']) : ?><li class="list-group-item"><?= lang('staff_id') ?><br><?= $user['staff_id'] ?></li><?php endif ?>
 				</ul>
 			</div>
 		</div>

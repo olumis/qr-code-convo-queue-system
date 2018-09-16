@@ -28,25 +28,17 @@ $(function()
         {
             conn.subscribe('confirmed.student', function(topic, response)
             {
-                let csc = $('#confirmed-student-container')
+                update_student_list(response)
+            })
 
-                let cs = $('#confirmed-student')
+            conn.subscribe('active.student', function(topic, response)
+            {
+                update_student_list(response)
+            })
 
-                if (typeof response.students !== 'undefined')
-                {
-                    let students = ''
-
-                    cs.html('')
-
-                    $.each(response.students, function(i)
-                    {
-                        students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].queue_no +'</td><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
-                    })
-
-                    cs.append(students)
-
-                    csc.scrollTop(9999)
-                }
+            conn.subscribe('reseted.student', function(topic, response)
+            {
+                update_student_list(response)
             })
         },
         
@@ -57,4 +49,31 @@ $(function()
         
         {'skipSubprotocolCheck': true}
     )
+
+    // table
+
+    $('table').scrollTableBody();
 })
+
+function update_student_list(response)
+{
+    let csc = $('#confirmed-student-container')
+
+    let cs = $('#confirmed-student')
+
+    if (typeof response.students !== 'undefined')
+    {
+        let students = ''
+
+        cs.html('')
+
+        $.each(response.students, function(i)
+        {
+            students += '<tr data-user-id="'+ response.students[i].user_id +'"><td>'+ response.students[i].queue_no +'</td><td>'+ response.students[i].fullname +'</td><td>'+ response.students[i].faculty +'</td><td>'+ response.students[i].student_id +'</td></tr>'
+        })
+
+        cs.append(students)
+
+        csc.scrollTop(9999)
+    }
+}

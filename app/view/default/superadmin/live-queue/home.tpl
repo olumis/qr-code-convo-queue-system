@@ -17,7 +17,7 @@
 		<div class="panel-body">
             <p class="lead text-center">CONFIRMED STUDENT</p>
             <hr>
-            <div class="table-responsive" id="confirmed-student-container">
+            <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
