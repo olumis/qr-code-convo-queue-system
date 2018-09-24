@@ -10,8 +10,11 @@ class Superadmin_Attendance
             COUNT(*) As total_rows
         
         FROM attendance a
+        LEFT JOIN user u ON u.user_id = a.user_id
         WHERE 1=1
         
+            AND u.is_active = 1
+
         ";
 
         $res = db_query($sql);
@@ -28,10 +31,12 @@ class Superadmin_Attendance
             ua.student_id
         
         FROM attendance a
+        LEFT JOIN user u ON u.user_id = a.user_id
         LEFT JOIN user_attr ua ON ua.user_id = a.user_id
         WHERE 1=1
         
             AND a.is_active = 0
+            AND u.is_active = 1
         
         ORDER BY a.created_at ASC, ua.faculty ASC
         
@@ -51,11 +56,13 @@ class Superadmin_Attendance
             ua.student_id
         
         FROM attendance a
+        LEFT JOIN user u ON u.user_id = a.user_id
         LEFT JOIN user_attr ua ON ua.user_id = a.user_id
         WHERE 1=1
         
             AND a.is_active = 1
             AND a.user_id = %d
+            AND u.is_active = 1
         
         LIMIT 1
         
