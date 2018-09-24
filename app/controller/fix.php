@@ -1,58 +1,45 @@
-<div id="student-list"></div>
+<?php
 
-<hr>
+$faculties = load_model('lists')->get('faculty')->rows;
 
-<ol id="student-active"></ol>
+$contents = file('resource/tcp1241_assign_tutorial_sept11.csv');
 
-<hr>
+$contents = array_map('trim', $contents);
 
-<button type="button">Go</button>
-
-<script>
-
-/**
- * student data can be fetched from any database 
- */
-
-const students = [
-    {name: 'shahril',faculty: 'ABC',id: '123'},
-    {name: 'alif',faculty: 'DEF',id: '456'},
-    {name: 'muiz',faculty: 'GHI',id: '789'},
-    {name: 'ashraf',faculty: 'JKL',id: '012'},
-    {name: 'wan',faculty: 'MNO',id: '345'}
-]
-
-display(students)
-
-document.querySelector('button').onclick = function()
+$contents = array_map(function($v)
 {
-    /**
-     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift
-     */
+    return [
+        'fullname'      => explode(',',$v)[2],
+        'student_id'    => explode(',',$v)[1]
+    ];
 
-    let firstelement = students.shift()
+}, $contents);
 
-    display(students)
+shuffle($contents);
 
-    document.getElementById('student-active').innerHTML = '<li>' + firstelement.name + '</li>'
-}
+$students = [];
 
-/**
- * list student name into the first <div>
- */
-
-function display(db)
+foreach ($faculties as $faculty)
 {
-    let html = '<ol>'
+    $three = [];
 
-    db.forEach(function(element, index)
+    foreach ($contents as $k => $content)
     {
-        html += '<li>'+ element.name +'</li>'
-    })
+        if (count($three) < 3)
+        {
+            $three[] = [
+                'fullname'      => $content['fullname'],
+                'faculty'       => $faculty['name'],
+                'student_id'    => $content['student_id']
+            ];
 
-    html += '</ol>'
+            array_shift($contents);
+        }
+        else break;
+    }
 
-    document.getElementById('student-list').innerHTML = html
+    $students[] = $three;
 }
 
-</script>
+
+print_r($students);

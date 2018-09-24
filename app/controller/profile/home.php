@@ -107,8 +107,19 @@ function goodpost()
 
 $posted = [];
 
+/**
+ * update profile except for superadmin
+ */
+
 if (isset($_POST['profile']))
 {
+	if (in_array($acl['superadmin'], $_SESSION['acl']))
+	{
+		$_SESSION['error'][] = lang('err_adm_nochange');
+
+		redirect(u('/profile'));
+	}
+
 	if (goodpost())
 	{
 		mysqli_autocommit($mysqli, false);

@@ -122,6 +122,7 @@ $_['err_img_size']     	= '%s exceeded the permitted file size.';
 $_['err_uploaded']     	= '%s has already been uploaded.';
 $_['err_perm_denied']	= 'Permission Denied';
 $_['err_plz_login']		= 'The system require you to sign in first in order to proceed. Sign up if you do not have an account.';
+$_['err_adm_nochange']  = 'The system prevent changing the administrator\'s profile';
 
 // success
 
